@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SES 4 — Merchant Ecosystem Solutions | Self-Learning Module</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange:#F47920; --orange-dark:#D4620F; --orange-light:#FFF3E8; --orange-mid:#FFE0C2;
+  --navy:#1A2B6B; --navy-light:#2E4099; --text-dark:#1A1A2E; --text-mid:#4A4A6A;
+  --text-light:#8888AA; --bg:#F4F6FB; --card:#FFFFFF; --border:#E8E8F0;
+  --green:#27AE60; --red:#E74C3C;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text-dark);}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(26,43,107,0.25);}
+.header-inner{max-width:960px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.header-logo{display:flex;align-items:center;gap:12px;}
+.logo-badge{width:36px;height:36px;background:var(--orange);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",serif;font-size:16px;color:white;font-weight:700;}
+.header-title{color:white;font-size:14px;font-weight:600;}
+.header-sub{color:rgba(255,255,255,0.5);font-size:11px;margin-top:1px;}
+.header-right{text-align:right;}
+.progress-meta{display:flex;align-items:center;gap:14px;justify-content:flex-end;margin-bottom:5px;}
+.duration-tag{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.75);font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;}
+.progress-label{color:rgba(255,255,255,0.6);font-size:11px;}
+.progress-bar-wrap{background:rgba(255,255,255,0.15);border-radius:20px;height:6px;width:160px;}
+.progress-bar-fill{background:var(--orange);border-radius:20px;height:6px;width:0%;transition:width 0.5s;}
+.progress-pct{color:var(--orange);font-size:11px;font-weight:600;margin-top:3px;text-align:right;}
+
+/* SCORE TRACKER */
+.score-pill{background:rgba(255,255,255,0.12);color:white;font-size:11px;font-weight:600;padding:3px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.2);}
+
+/* OVERVIEW */
+.overview{max-width:960px;margin:28px auto 0;padding:0 24px;}
+.overview-card{background:linear-gradient(135deg,var(--orange) 0%,#FF9A3C 100%);border-radius:20px;padding:30px 34px;color:white;position:relative;overflow:hidden;}
+.overview-card::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;background:rgba(255,255,255,0.08);border-radius:50%;}
+.overview-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:8px;}
+.overview-heading{font-family:"Playfair Display",serif;font-size:24px;margin-bottom:14px;line-height:1.3;position:relative;z-index:1;}
+.overview-text{font-size:14.5px;line-height:1.85;opacity:0.95;position:relative;z-index:1;max-width:700px;}
+
+/* TOPIC SECTION */
+.topic-section{max-width:960px;margin:36px auto 0;padding:0 24px;}
+.topic-header{background:linear-gradient(135deg,var(--orange-light) 0%,#FFE8D0 100%);border:1.5px solid var(--orange-mid);border-radius:16px;padding:18px 22px;display:flex;align-items:center;gap:16px;margin-bottom:22px;position:relative;overflow:hidden;}
+.topic-header::after{content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;background:rgba(244,121,32,0.08);border-radius:50%;}
+.topic-number{width:46px;height:46px;background:var(--orange);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:17px;flex-shrink:0;box-shadow:0 4px 12px rgba(244,121,32,0.35);}
+.topic-title{font-family:"Playfair Display",serif;font-size:21px;color:var(--navy);}
+.topic-subtitle{font-size:13px;color:var(--orange-dark);margin-top:3px;font-weight:500;}
+
+/* MERCHANT BOX */
+.merchant-box{background:white;border-left:4px solid var(--orange);border-radius:0 14px 14px 0;padding:18px 22px;margin-bottom:18px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 2px 12px rgba(0,0,0,0.05);}
+.merchant-emoji{font-size:30px;flex-shrink:0;margin-top:2px;}
+.merchant-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:5px;}
+.merchant-story{font-size:14px;line-height:1.75;color:var(--text-dark);}
+.merchant-story strong{color:var(--navy);}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:10px;}
+.faq-item{background:var(--card);border-radius:14px;border:1.5px solid var(--border);overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;}
+.faq-item.open{border-color:var(--orange);box-shadow:0 4px 18px rgba(244,121,32,0.1);}
+.faq-question{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:14px;user-select:none;}
+.faq-q-left{display:flex;align-items:center;gap:13px;}
+.faq-q-icon{width:34px;height:34px;background:var(--orange-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:background 0.2s;}
+.faq-item.open .faq-q-icon{background:var(--orange);}
+.faq-q-text{font-size:14.5px;font-weight:500;color:var(--text-dark);line-height:1.4;}
+.faq-arrow{width:28px;height:28px;background:var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.3s,background 0.2s;font-size:11px;color:var(--text-mid);}
+.faq-item.open .faq-arrow{transform:rotate(180deg);background:var(--orange);color:white;}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+.faq-item.open .faq-answer{max-height:1400px;}
+.faq-answer-inner{padding:0 20px 20px 67px;font-size:14px;line-height:1.8;color:var(--text-mid);}
+.faq-answer-inner p{margin-bottom:10px;}
+.faq-answer-inner p:last-child{margin-bottom:0;}
+.faq-answer-inner ul{padding-left:18px;margin-top:8px;}
+.faq-answer-inner ul li{margin-bottom:6px;}
+.example-box{background:var(--orange-light);border-radius:10px;padding:14px 16px;margin-top:12px;font-size:13.5px;color:var(--navy);border-left:3px solid var(--orange);}
+.example-box strong{display:block;margin-bottom:5px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.tag{display:inline-block;background:var(--orange-light);color:var(--orange-dark);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;margin-right:6px;margin-bottom:6px;border:1px solid var(--orange-mid);}
+
+/* MCQ */
+.mcq-block{background:linear-gradient(135deg,var(--orange) 0%,#E8690A 100%);border-radius:18px;padding:26px 28px;margin:24px 0;color:white;box-shadow:0 8px 30px rgba(244,121,32,0.3);}
+.mcq-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.2);}
+.mcq-badge{background:rgba(255,255,255,0.2);border-radius:10px;padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(255,255,255,0.3);}
+.mcq-title{font-size:15px;font-weight:600;}
+.mcq-item{margin-bottom:20px;}
+.mcq-item:last-child{margin-bottom:0;}
+.mcq-q{font-size:14px;font-weight:500;margin-bottom:10px;line-height:1.6;}
+.mcq-q span{font-weight:700;margin-right:5px;opacity:0.8;}
+.mcq-options{display:flex;flex-direction:column;gap:7px;}
+.mcq-option{background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.18);border-radius:10px;padding:10px 15px;font-size:13.5px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.9);}
+.mcq-option:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.35);}
+.mcq-option.correct{background:rgba(255,255,255,0.25);border-color:white;color:white;font-weight:600;}
+.mcq-option.wrong{background:rgba(0,0,0,0.15);border-color:rgba(0,0,0,0.3);opacity:0.7;}
+.mcq-option.reveal-correct{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.6);}
+.option-dot{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.25);}
+.mcq-option.correct .option-dot{background:white;color:var(--orange);border-color:white;}
+.mcq-feedback{display:none;margin-top:8px;font-size:12.5px;padding:9px 13px;border-radius:9px;line-height:1.5;}
+.mcq-feedback.show{display:block;}
+.mcq-feedback.correct-fb{background:rgba(255,255,255,0.2);color:white;border-left:3px solid rgba(255,255,255,0.7);}
+.mcq-feedback.wrong-fb{background:rgba(0,0,0,0.15);color:rgba(255,255,255,0.85);border-left:3px solid rgba(255,255,255,0.4);}
+
+/* DRAG AND DROP */
+.dnd-block{background:white;border:2px solid var(--orange-mid);border-radius:18px;padding:26px 28px;margin:24px 0;box-shadow:0 4px 20px rgba(244,121,32,0.08);}
+.dnd-header{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.dnd-badge{background:var(--orange);color:white;border-radius:10px;padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.dnd-title{font-size:15px;font-weight:600;color:var(--navy);}
+.dnd-instruction{font-size:13px;color:var(--text-mid);margin-bottom:20px;padding:10px 14px;background:var(--orange-light);border-radius:9px;border-left:3px solid var(--orange);}
+.dnd-score-display{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:14px;min-height:22px;}
+
+.dnd-body{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:18px;}
+.dnd-chips-area h4{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light);margin-bottom:10px;}
+.dnd-chips{display:flex;flex-direction:column;gap:8px;min-height:60px;}
+.dnd-chip{background:var(--navy);color:white;border-radius:10px;padding:10px 14px;font-size:13px;cursor:grab;transition:all 0.2s;border:2px solid transparent;line-height:1.4;}
+.dnd-chip:hover{background:var(--navy-light);transform:translateY(-1px);box-shadow:0 4px 12px rgba(26,43,107,0.25);}
+.dnd-chip.dragging{opacity:0.5;cursor:grabbing;}
+.dnd-chip.correct-chip{background:#27AE60;border-color:#1E8449;}
+.dnd-chip.wrong-chip{background:#E74C3C;border-color:#C0392B;}
+
+.dnd-zones-area h4{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light);margin-bottom:10px;}
+.dnd-zones{display:flex;flex-direction:column;gap:8px;}
+.drop-zone{border:2px dashed var(--orange-mid);border-radius:10px;padding:10px 14px;min-height:50px;transition:all 0.2s;background:var(--orange-light);}
+.drop-zone.drag-over{border-color:var(--orange);background:#FFE8D0;transform:scale(1.01);}
+.drop-zone .zone-label{font-size:12px;font-weight:700;color:var(--orange-dark);margin-bottom:5px;}
+.drop-zone.correct-zone{border-color:#27AE60;background:#EAFAF1;}
+.drop-zone.wrong-zone{border-color:#E74C3C;background:#FDEDEC;}
+
+.dnd-buttons{display:flex;gap:12px;flex-wrap:wrap;}
+.dnd-check-btn{background:var(--orange);color:white;border:none;border-radius:10px;padding:11px 24px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:"DM Sans",sans-serif;}
+.dnd-check-btn:hover{background:var(--orange-dark);transform:translateY(-1px);}
+.dnd-check-btn:disabled{background:var(--text-light);cursor:not-allowed;transform:none;}
+.dnd-reset-btn{background:white;color:var(--navy);border:2px solid var(--navy);border-radius:10px;padding:11px 24px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:"DM Sans",sans-serif;display:none;}
+.dnd-reset-btn:hover{background:var(--navy);color:white;}
+
+/* DIVIDER */
+.section-divider{max-width:960px;margin:36px auto;padding:0 24px;display:flex;align-items:center;gap:16px;}
+.divider-line{flex:1;height:1px;background:var(--border);}
+.divider-dot{width:8px;height:8px;border-radius:50%;background:var(--orange-mid);}
+
+/* LIGHT SECTION (for 2-FAQ-only topics) */
+.light-section{max-width:960px;margin:36px auto 0;padding:0 24px;}
+.light-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.light-number{width:36px;height:36px;background:var(--orange-mid);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--orange-dark);font-weight:700;font-size:14px;flex-shrink:0;}
+.light-title{font-family:"Playfair Display",serif;font-size:18px;color:var(--navy);}
+.light-subtitle{font-size:12px;color:var(--text-light);margin-top:2px;}
+
+/* FINAL BADGE */
+.badge-section{max-width:960px;margin:40px auto 60px;padding:0 24px;}
+.badge-card{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);border-radius:24px;padding:40px;text-align:center;color:white;position:relative;overflow:hidden;}
+.badge-card::before{content:'';position:absolute;right:-60px;top:-60px;width:250px;height:250px;background:rgba(255,255,255,0.04);border-radius:50%;}
+.badge-emoji{font-size:80px;margin-bottom:16px;display:block;animation:badgePop 0.6s ease;}
+@keyframes badgePop{0%{transform:scale(0.5);opacity:0;}70%{transform:scale(1.1);}100%{transform:scale(1);opacity:1;}}
+.badge-title{font-family:"Playfair Display",serif;font-size:28px;margin-bottom:8px;}
+.badge-subtitle{font-size:16px;opacity:0.8;margin-bottom:20px;}
+.badge-score{font-size:22px;font-weight:700;color:var(--orange);margin-bottom:8px;}
+.badge-score-label{font-size:13px;opacity:0.6;}
+.badge-message{background:rgba(255,255,255,0.1);border-radius:12px;padding:16px 20px;font-size:14px;line-height:1.7;margin-top:20px;opacity:0.9;}
+.badge-hidden{display:none;}
+
+/* FOOTER */
+.footer{max-width:960px;margin:0 auto 40px;padding:0 24px;text-align:center;color:var(--text-light);font-size:12px;}
+
+/* iOS / touch support */
+.dnd-chip{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;}
+.dnd-chip.selected{outline:3px solid var(--orange);outline-offset:2px;}
+.dnd-ghost{position:fixed;z-index:9999;pointer-events:none;opacity:0.9;box-shadow:0 8px 24px rgba(0,0,0,0.3);margin:0;}
+.faq-item,.mcq-option{-webkit-tap-highlight-color:transparent;}
+.header{position:-webkit-sticky;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <div class="logo-badge">i</div>
+      <div>
+        <div class="header-title">Merchant Ecosystem Solutions — SES 4</div>
+        <div class="header-sub">Self-Learning Module</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="progress-meta">
+        <div class="duration-tag">🕐 Est. 60 min</div>
+        <div class="score-pill" id="totalScorePill">Score: 0</div>
+        <div class="progress-label">Progress</div>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+      <div class="progress-pct" id="progressPct">0%</div>
+    </div>
+  </div>
+</div>
+
+<div class="overview">
+  <div class="overview-card">
+    <div class="overview-label">📚 What You Will Learn</div>
+    <div class="overview-heading">Merchant Ecosystem Solutions (MES)</div>
+    <div class="overview-text">
+      Every business that sells something — a kirana store, a school, a restaurant — needs to collect money from customers and pay money to vendors and staff. ICICI Bank has built a complete toolkit called Merchant Ecosystem Solutions (MES) to handle this. In this module, you will learn which ICICI Bank product is right for which merchant — from a small tea stall using a QR code, to a large hospital automating 500 vendor payments overnight. By the end, you will be able to sit in front of any merchant, understand their problem, and confidently recommend the right ICICI Bank solution.
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="topic-section">
+  <div class="topic-header">
+    <div class="topic-number">1</div>
+    <div>
+      <div class="topic-title">Introduction to MES</div>
+      <div class="topic-subtitle">What is Merchant Ecosystem Solutions and why does it matter?</div>
+    </div>
+  </div>
+  <div class="merchant-box">
+    <div class="merchant-emoji">🏪</div>
+    <div>
+      <div class="merchant-label">Meet the Merchant</div>
+      <div class="merchant-story"><strong>Ravi owns two grocery stores — one in Pune, one in Nashik.</strong> Customers pay by cash, UPI, and card. He pays his 3 suppliers by cheque every week and gives salaries in cash. He uses a different app for each payment method and still has to visit the bank for some things. He has no way to see how both stores are doing together. <strong>This is the exact problem MES was built to solve.</strong></div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🏦</div>
+          <div class="faq-q-text">What exactly is Merchant Ecosystem Solutions (MES)?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>MES is ICICI Bank's complete toolkit that helps any business handle <strong>all its money needs in one place</strong> — receiving payments from customers, making payments to vendors and staff, and connecting their accounting software directly to the bank.</p><p>It has three pillars:</p><ul><li><strong>Collections</strong> — Tools to receive money: POS, QR/UPI, Payment Gateway, E-Collection, Door Step Banking</li><li><strong>Payments</strong> — Tools to send money: BizPay360, I-Multipay</li><li><strong>Connected Banking</strong> — Tools to link accounting software to ICICI Bank: API Banking, H2H, Tally Plugin</li></ul><div class="example-box"><strong>Think of it like this</strong>MES is like a Swiss Army Knife for a merchant's financial life. Instead of using 5 apps from 5 different companies, ICICI gives everything in one ecosystem — all linked to one current account.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🎯</div>
+          <div class="faq-q-text">As an RM, how do I figure out which MES product to offer a merchant?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>Always start with <strong>three simple questions</strong>:</p><ul><li>How does the merchant currently <strong>receive money</strong> from customers?</li><li>How does the merchant currently <strong>pay</strong> vendors, staff, suppliers?</li><li>Does the merchant use any accounting software like Tally?</li></ul><p>Based on the answers, you map them to the right product. A small retailer needs QR and POS. A school needs Bill Upload. A factory paying 500 vendors needs I-Multipay or H2H.</p><div class="example-box"><strong>Golden Rule for RMs</strong>Never pitch a product first. Always understand the problem first. Ask → Understand → Recommend.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">💡</div>
+          <div class="faq-q-text">Why would a merchant prefer ICICI MES over using Paytm, PhonePe, or other apps?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>When a merchant uses ICICI MES tools, all money — from QR, POS, online orders, and bank transfers — settles directly into their <strong>ICICI Current Account</strong>. Benefits:</p><ul><li><strong>One account, one view</strong> — no juggling between multiple apps and banks</li><li><strong>T+1 settlement</strong> — money in account by next working day, predictably</li><li><strong>Loan eligibility</strong> — ICICI can offer business loans based on transaction history</li><li><strong>Single RM</strong> — one point of contact for all banking needs</li></ul><div class="example-box"><strong>Real scenario</strong>If Ravi uses PhonePe QR and HDFC POS, his collections land in 2 different banks. With ICICI MES, everything lands in his one ICICI account — simpler, safer, and easier to grow from.</div></div></div>
+    </div>
+  </div>
+  <div class="mcq-block">
+    <div class="mcq-header">
+      <div class="mcq-badge">🎯 Quick Check</div>
+      <div class="mcq-title">Introduction to MES — Test Your Understanding</div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q1.</span> Ravi has a grocery shop. He collects payments from customers by QR and card. He also pays his 3 suppliers by cheque every month. Which MES pillars will he use?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Only Collections covers incoming money. Ravi also needs to pay suppliers, so Payments pillar is also needed.',0)"><div class="option-dot">A</div>Only Collections</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Only Payments covers outgoing money. Ravi also collects from customers, so Collections pillar is also needed.',0)"><div class="option-dot">B</div>Only Payments</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Ravi collects from customers (Collections pillar) and pays suppliers (Payments pillar). He does not need Connected Banking unless he uses Tally or ERP.',0)"><div class="option-dot">C</div>Collections and Payments</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Connected Banking (API, H2H, Tally) is only needed if Ravi has an ERP or accounting software he wants to connect to the bank — which is not mentioned here.',0)"><div class="option-dot">D</div>Collections, Payments and Connected Banking</div>
+      </div>
+      <div class="mcq-feedback" id="fb-0"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q2.</span> What is the most important first step for an RM before recommending any MES product?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Showing a brochure without understanding the merchant's problem often leads to the wrong product recommendation.',1)"><div class="option-dot">A</div>Show the merchant the product brochure</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Understanding the merchant's current payment and collection methods is the foundation. Only then can the RM recommend the right product.',1)"><div class="option-dot">B</div>Understand how the merchant currently collects and pays money</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Telling the merchant about a product without understanding their need may lead to rejection or wrong recommendations.',1)"><div class="option-dot">C</div>Tell the merchant about the best product</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'A current account is needed, but the RM must first understand the merchant's business needs before recommending MES products.',1)"><div class="option-dot">D</div>Open a current account first</div>
+      </div>
+      <div class="mcq-feedback" id="fb-1"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q3.</span> When a merchant uses ICICI MES products for collections, where does the money settle?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'MES is not linked to any third-party wallets. All settlements go to the ICICI Current Account.',2)"><div class="option-dot">A</div>PhonePe wallet</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! All collections through ICICI MES tools — QR, POS, Payment Gateway — settle directly into the merchant's ICICI Current Account on a T+1 basis.',2)"><div class="option-dot">B</div>ICICI Bank Current Account</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'There is no separate MES account. All money settles into the linked ICICI Current Account.',2)"><div class="option-dot">C</div>A separate MES account</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'MES is designed for business transactions and links to a Current Account, not a savings account.',2)"><div class="option-dot">D</div>The merchant's savings account</div>
+      </div>
+      <div class="mcq-feedback" id="fb-2"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q4.</span> Which of the following is NOT part of the Collections pillar of MES?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'POS Machine is definitely part of the Collections pillar — it helps merchants receive card payments.',3)"><div class="option-dot">A</div>POS Machine</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'QR/UPI is a core part of the Collections pillar — one of the most widely used collection tools.',3)"><div class="option-dot">B</div>QR / UPI</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! BizPay360 is a Payments tool — it is used for sending money out (paying vendors, salaries, etc.), not for receiving money.',3)"><div class="option-dot">C</div>BizPay360</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'E-Collection is part of the Collections pillar — it helps merchants receive NEFT/RTGS payments through virtual account numbers.',3)"><div class="option-dot">D</div>E-Collection</div>
+      </div>
+      <div class="mcq-feedback" id="fb-3"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q5.</span> T+1 settlement means the merchant gets their collected money on:</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Same-day settlement is not the standard for ICICI MES. T+1 means the next working day.',4)"><div class="option-dot">A</div>The same day of collection</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! T+1 means the merchant receives their settlement on the next working day after the transaction date.',4)"><div class="option-dot">B</div>The next working day</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'T+2 would mean two working days — that is not T+1.',4)"><div class="option-dot">C</div>After 2 working days</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Monthly settlement is not how MES works. Settlement is on T+1 basis — next working day.',4)"><div class="option-dot">D</div>At the end of the month</div>
+      </div>
+      <div class="mcq-feedback" id="fb-4"></div>
+    </div>
+  </div>
+  <div class="dnd-block" id="dnd0">
+    <div class="dnd-header">
+      <div class="dnd-badge">🎮 Match the Merchant</div>
+      <div class="dnd-title">Which MES Pillar Does This Merchant Need?</div>
+    </div>
+    <div class="dnd-instruction">💡 Drag each merchant card to the correct MES pillar. One merchant may need more than one — pick the PRIMARY need.</div>
+    <div class="dnd-score-display" id="dnd0-score"></div>
+    <div class="dnd-body">
+      <div class="dnd-chips-area">
+        <h4>Merchant / Situation</h4>
+        <div class="dnd-chips" id="dnd0-chips"><div class="dnd-chip" draggable="false" data-id="chip0" data-answer="collections">School collecting term fees from 500 parents digitally</div><div class="dnd-chip" draggable="false" data-id="chip1" data-answer="payments">Factory owner paying salaries to 200 workers every month</div><div class="dnd-chip" draggable="false" data-id="chip2" data-answer="connected">Wholesale trader wanting Tally to auto-reconcile with bank</div><div class="dnd-chip" draggable="false" data-id="chip3" data-answer="collections">Restaurant owner wanting customers to pay by card or QR</div><div class="dnd-chip" draggable="false" data-id="chip4" data-answer="payments">Logistics firm making daily vendor payments in bulk</div></div>
+      </div>
+      <div class="dnd-zones-area">
+        <h4>ICICI Solution</h4>
+        <div class="dnd-zones" id="dnd0-zones"><div class="drop-zone" data-id="collections" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd0')"><div class="zone-label">Collections (Receiving Money)</div></div><div class="drop-zone" data-id="payments" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd0')"><div class="zone-label">Payments (Sending Money)</div></div><div class="drop-zone" data-id="connected" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd0')"><div class="zone-label">Connected Banking (ERP Integration)</div></div></div>
+      </div>
+    </div>
+    <div class="dnd-buttons">
+      <button class="dnd-check-btn" id="dnd0-checkbtn" onclick="checkDnD('dnd0',5)">Check Answers</button>
+      <button class="dnd-reset-btn" id="dnd0-resetbtn" onclick="resetDnD('dnd0')">Try Again</button>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="topic-section">
+  <div class="topic-header">
+    <div class="topic-number">2</div>
+    <div>
+      <div class="topic-title">QR / UPI — Collecting Payments the Smart Way</div>
+      <div class="topic-subtitle">Covers: Static QR, Dynamic QR, Sound Box, UPI Dashboard, Expression QR, UPI Intent — and who needs what</div>
+    </div>
+  </div>
+  <div class="merchant-box">
+    <div class="merchant-emoji">☕</div>
+    <div>
+      <div class="merchant-label">Meet the Merchant</div>
+      <div class="merchant-story"><strong>Meena runs a busy tea stall near a bus stand.</strong> 80–100 customers a day. Half ask "UPI hai kya?" She has a PhonePe QR stuck on her counter, but she's always busy making tea and cannot check her phone. She once got cheated by a fake payment screenshot. She has no idea what her total daily collections are. She has no way to know if a payment failed. <strong>ICICI Bank's QR solutions solve every single one of these problems.</strong></div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">📱</div>
+          <div class="faq-q-text">What is Static QR and what is Dynamic QR — and which merchant needs which?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p><strong>Static QR</strong> is a fixed printed code. The customer scans it and types the amount manually. It never changes — laminate it and stick it on the counter forever.</p><p><strong>Dynamic QR</strong> is generated fresh for each transaction with the exact bill amount already loaded. Customer just scans and pays — no typing, no error.</p><div class="example-box"><strong>Who needs what?</strong>Meena's tea stall → <strong>Static QR</strong> is perfect. Prices are standard (₹10, ₹20). Simple and free.<br><br>A restaurant billing ₹1,248 after a full meal → <strong>Dynamic QR</strong>. The billing software generates the bill, QR auto-loads the exact amount. No chance of a customer entering the wrong number.</div><p style="margin-top:10px"><span class="tag">Zero transaction charges</span><span class="tag">Settles to ICICI CA</span><span class="tag">T+1 settlement</span></p></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🔊</div>
+          <div class="faq-q-text">What is the Sound Box (EazySound) and exactly who benefits from it?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>The Sound Box is a small speaker device that sits at the merchant's counter and <strong>announces payment confirmation out loud</strong> the moment a UPI payment arrives — in the merchant's chosen language. It supports <strong>8 languages</strong>.</p><p>Critically, it also announces <strong>failed transactions</strong> — so the merchant knows immediately if something went wrong, without checking a phone.</p><div class="example-box"><strong>Solves Meena's exact problem</strong>Meena is making tea and cannot look at her phone. With the Sound Box she hears "Payment received ₹30" without looking. No more fake screenshot tricks. If a payment fails, she hears that too.<br><br>One-time installation: <strong>₹499</strong>. Monthly rental: <strong>₹150</strong>.</div><p style="margin-top:10px">Best for: <span class="tag">Busy counters</span><span class="tag">Noisy shops</span><span class="tag">Street vendors</span><span class="tag">Medical stores</span><span class="tag">Petrol pumps</span></p></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">📊</div>
+          <div class="faq-q-text">A merchant has multiple outlets. How does ICICI Bank help them track all counters together?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>The <strong>Merchant QR/UPI Dashboard</strong> is a web portal where each outlet or counter is added as a <strong>sub-merchant</strong> under the main merchant's account. The owner can see all counters in one unified view — daily, weekly, and monthly breakdowns by counter, mode, and amount.</p><p>Key features: real-time updates, reports downloadable with payer details, search by RRN number for dispute resolution, and the ability to delegate access to a manager.</p><div class="example-box"><strong>Imagine this</strong>A clothing showroom owner in Mumbai has 4 billing counters across 2 floors. From home at 9 PM, she sees Counter 3 collected ₹45,000 today while Counter 1 only did ₹12,000. She knows exactly where to focus tomorrow morning — without having visited the store.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🚚</div>
+          <div class="faq-q-text">A merchant collects payment at the customer's doorstep. How does UPI work without the customer scanning a code?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p><strong>UPI Intent</strong> is the answer. The merchant sends a <strong>payment request via SMS</strong> to the customer's mobile number. The customer receives it on their phone and approves — from wherever they are. No physical QR code needed.</p><div class="example-box"><strong>Live use case — Home delivery medicine shop</strong>A pharmacy in Bengaluru delivers medicines worth ₹760 to a customer's home. Instead of the delivery person carrying a QR standee or handling cash, the pharmacist sends a UPI payment request to the customer's number. Customer approves from inside their home. Zero cash, zero risk, clean digital trail.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🎨</div>
+          <div class="faq-q-text">What is Expression QR and does it actually matter for a merchant's business?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>Expression QR is a <strong>branded, customized QR code</strong> — the merchant chooses a design template that matches their industry (restaurant, pharmacy, clothing, etc.) and gets it printed as a professional standee or sticker.</p><p>Functionally it works the same as a Static QR — but it looks designed and professional, not just a paper printout.</p><div class="example-box"><strong>Why it matters more than it looks</strong>Imagine two restaurants. One has a scruffy printed QR taped to the wall. The other has a branded ICICI Bank Expression QR standee with the restaurant's logo. The second one signals: "We are established. We are professional. Trust us." Perception matters in business.</div><p style="margin-top:10px">Ordered via: InstaBIZ App → My QR → Expression QR</p></div></div>
+    </div>
+  </div>
+  <div class="mcq-block">
+    <div class="mcq-header">
+      <div class="mcq-badge">🎯 Quick Check</div>
+      <div class="mcq-title">QR / UPI — Test Your Understanding</div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q1.</span> Sunita runs a busy vegetable market stall and cannot check her phone every time a payment comes in. She wants instant confirmation without looking at her screen. What should her RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Static QR helps collect payments but gives no audio alert. Sunita will still need to check her phone each time.',5)"><div class="option-dot">A</div>Static QR Code only</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Sound Box announces payment confirmation out loud the moment money arrives — perfect for a busy stall where the merchant cannot keep looking at their phone.',5)"><div class="option-dot">B</div>Sound Box (EazySound)</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Expression QR is a branded version of Static QR — it does not provide audio alerts for incoming payments.',5)"><div class="option-dot">C</div>Expression QR Standee</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'UPI Dashboard is for monitoring transaction history — not for real-time counter-level audio alerts.',5)"><div class="option-dot">D</div>UPI Dashboard</div>
+      </div>
+      <div class="mcq-feedback" id="fb-5"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q2.</span> A restaurant's billing software generates bills for each table. The restaurant wants the customer to pay the exact bill amount without typing it in manually. Which QR type should the RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Static QR requires the customer to type the amount manually — errors can happen, especially with odd amounts like ₹1,248.',6)"><div class="option-dot">A</div>Static QR</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Dynamic QR is generated per bill with the exact amount pre-loaded. Customer just scans and pays — no manual entry, no errors.',6)"><div class="option-dot">B</div>Dynamic QR</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Expression QR is a branding upgrade of Static QR — the amount still needs to be entered manually by the customer.',6)"><div class="option-dot">C</div>Expression QR</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'UPI Intent sends a request via SMS — designed for remote payments, not for in-restaurant billing counter use.',6)"><div class="option-dot">D</div>UPI Intent</div>
+      </div>
+      <div class="mcq-feedback" id="fb-6"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q3.</span> Mr. Sharma owns a clothing showroom with 5 billing counters. He travels frequently and wants to see counter-wise collections from anywhere. What should his RM set up?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Sound Box gives audio alerts at the counter level — it does not give a consolidated remote view of multiple counters.',7)"><div class="option-dot">A</div>Sound Box at each counter</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'BizPay360 is for sending bulk payments out — it is not a collection monitoring dashboard.',7)"><div class="option-dot">B</div>BizPay360</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! The QR/UPI Dashboard with sub-merchant setup gives a unified remote view of all 5 counters — with daily, weekly, and monthly breakdowns accessible from anywhere.',7)"><div class="option-dot">C</div>QR/UPI Dashboard with sub-merchant setup</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Expression QR is only a branding tool for the QR code — it provides no tracking or remote monitoring capability.',7)"><div class="option-dot">D</div>Expression QR for each counter</div>
+      </div>
+      <div class="mcq-feedback" id="fb-7"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q4.</span> A home delivery pharmacy wants to collect UPI payment from a customer at their doorstep without needing the customer to scan a physical code. Which feature solves this?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Static QR requires the customer to physically scan a code — not suitable for doorstep delivery scenarios.',8)"><div class="option-dot">A</div>Static QR</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Dynamic QR also requires physical scanning at the point of sale — it does not support remote payment collection.',8)"><div class="option-dot">B</div>Dynamic QR</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Sound Box announces payment receipts — it does not help initiate a payment request to a remote customer.',8)"><div class="option-dot">C</div>Sound Box</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! UPI Intent sends a payment request via SMS to the customer's mobile number. The customer approves from home — perfect for cash-on-delivery replacement at doorstep.',8)"><div class="option-dot">D</div>UPI Intent (payment request via SMS)</div>
+      </div>
+      <div class="mcq-feedback" id="fb-8"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q5.</span> What is the one-time installation cost of the ICICI Bank Sound Box (EazySound)?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'₹99 is not the installation cost for Sound Box.',9)"><div class="option-dot">A</div>₹99</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'₹150 is the monthly rental — not the one-time installation fee.',9)"><div class="option-dot">B</div>₹150</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! One-time installation is ₹499. Monthly rental is ₹150, with dynamic pricing available for high-volume merchants.',9)"><div class="option-dot">C</div>₹499</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'₹999 is not the correct amount for Sound Box installation.',9)"><div class="option-dot">D</div>₹999</div>
+      </div>
+      <div class="mcq-feedback" id="fb-9"></div>
+    </div>
+  </div>
+  <div class="dnd-block" id="dnd1">
+    <div class="dnd-header">
+      <div class="dnd-badge">🎮 Match the Merchant</div>
+      <div class="dnd-title">Match Each Merchant to the Right QR/UPI Solution</div>
+    </div>
+    <div class="dnd-instruction">💡 Drag each merchant scenario to the ICICI Bank QR/UPI product that best solves their problem.</div>
+    <div class="dnd-score-display" id="dnd1-score"></div>
+    <div class="dnd-body">
+      <div class="dnd-chips-area">
+        <h4>Merchant / Situation</h4>
+        <div class="dnd-chips" id="dnd1-chips"><div class="dnd-chip" draggable="false" data-id="chip0" data-answer="soundbox">A tea stall owner who needs instant audio confirmation when payment arrives</div><div class="dnd-chip" draggable="false" data-id="chip1" data-answer="dynamicqr">A restaurant that auto-generates bills and wants customer to pay exact amount by scanning</div><div class="dnd-chip" draggable="false" data-id="chip2" data-answer="dashboard">A clothing store owner with 4 counters who wants remote collection monitoring</div><div class="dnd-chip" draggable="false" data-id="chip3" data-answer="intent">A home delivery grocery store sending payment request to customer at their door</div><div class="dnd-chip" draggable="false" data-id="chip4" data-answer="expressionqr">A pharmacy that wants a professional branded QR code for their counter</div></div>
+      </div>
+      <div class="dnd-zones-area">
+        <h4>ICICI Solution</h4>
+        <div class="dnd-zones" id="dnd1-zones"><div class="drop-zone" data-id="soundbox" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd1')"><div class="zone-label">Sound Box (EazySound)</div></div><div class="drop-zone" data-id="dynamicqr" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd1')"><div class="zone-label">Dynamic QR</div></div><div class="drop-zone" data-id="dashboard" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd1')"><div class="zone-label">QR/UPI Dashboard</div></div><div class="drop-zone" data-id="intent" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd1')"><div class="zone-label">UPI Intent (SMS request)</div></div><div class="drop-zone" data-id="expressionqr" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd1')"><div class="zone-label">Expression QR</div></div></div>
+      </div>
+    </div>
+    <div class="dnd-buttons">
+      <button class="dnd-check-btn" id="dnd1-checkbtn" onclick="checkDnD('dnd1',5)">Check Answers</button>
+      <button class="dnd-reset-btn" id="dnd1-resetbtn" onclick="resetDnD('dnd1')">Try Again</button>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="topic-section">
+  <div class="topic-header">
+    <div class="topic-number">3</div>
+    <div>
+      <div class="topic-title">POS Machine — Collecting Card Payments In-Store</div>
+      <div class="topic-subtitle">Who needs a POS, what does it do, and how does it compare to QR?</div>
+    </div>
+  </div>
+  <div class="merchant-box">
+    <div class="merchant-emoji">🛍️</div>
+    <div>
+      <div class="merchant-label">Meet the Merchant</div>
+      <div class="merchant-story"><strong>Arnav runs an electronics showroom with average bill sizes of ₹8,000–₹50,000.</strong> Most customers pay by credit card or debit card. Some want to pay via EMI. A QR code works for UPI, but not for credit card swipes, EMI offers, or brand-specific discounts. He is currently using a competitor's POS machine, paying high rental and getting poor service. <strong>This is exactly the merchant profile that needs ICICI Bank's Android POS.</strong></div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">💳</div>
+          <div class="faq-q-text">What is a POS machine and what type of merchant actually needs one?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>POS stands for <strong>Point of Sale</strong> — it is the device at a merchant's counter where a customer swipes, dips, or taps their debit or credit card to pay. ICICI Bank's POS is an <strong>Android-based smart terminal (APOS)</strong> — not a basic card reader, but a full smart device that also accepts Dynamic QR payments.</p><p>A merchant needs POS when:</p><ul><li>Customers pay by credit card or debit card (QR only handles UPI)</li><li>The merchant wants to offer <strong>EMI on credit cards</strong></li><li>High-ticket purchases where customers prefer card payments</li><li>The merchant wants a billing system integrated with the payment device</li></ul><div class="example-box"><strong>QR vs POS — the key difference</strong>QR only accepts UPI payments. POS accepts Credit Cards, Debit Cards, Dynamic QR, and supports EMI and Brand EMI — making it essential for high-ticket retail.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">📱</div>
+          <div class="faq-q-text">What makes ICICI Bank's POS (APOS) different from a regular swipe machine?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>ICICI's APOS (Android POS) is a <strong>5.5-inch touchscreen Android 11 device</strong> — not a simple card reader. It is a smart terminal with:</p><ul><li><strong>NFC (Tap to Pay)</strong> — customer taps phone or card, no swipe needed</li><li><strong>Dynamic QR integration</strong> — accepts UPI alongside card payments</li><li><strong>Voice notification</strong> — confirms payment out loud (like Sound Box)</li><li><strong>App dashboard</strong> — daily and weekly analysis on the device itself</li><li><strong>Brand EMI and CC EMI</strong> — merchant can offer EMI on specific brands</li><li><strong>Billing system and ERP integration</strong> — connects to merchant's billing software</li></ul><div class="example-box"><strong>Think of it like this</strong>A regular swipe machine is like a basic phone from 2010 — it only calls. ICICI's APOS is like a smartphone — it handles payments, shows analytics, integrates with billing software, and accepts tap, swipe, dip, and QR all in one device.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🏪</div>
+          <div class="faq-q-text">Which type of merchant should an RM pitch POS to? Who should NOT get a POS?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p><strong>Offer POS to:</strong></p><ul><li>Mass retail — grocery chains, medical stores, clothing stores</li><li>Mid-size merchants — restaurants, electronics shops, jewellers</li><li>Large format stores — supermarkets, malls, hospitals — especially with ERP/billing system</li></ul><p><strong>Do NOT offer POS to:</strong></p><ul><li>Very small street vendors or stalls (QR is sufficient and free)</li><li>Businesses that are not in the approved merchant category list</li></ul><p>Important operational note: <strong>Retail/MES ZH approval is required</strong> for each POS merchant. The window to add a new POS merchant opens only <strong>twice a month per zone per RH</strong> — so RMs must plan in advance.</p><div class="example-box"><strong>RM tip</strong>If a merchant only receives UPI payments and has low ticket sizes (under ₹500), a QR code is sufficient and free. Save POS for merchants who need card acceptance, EMI, or billing integration.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🃏</div>
+          <div class="faq-q-text">What card types and payment modes does the ICICI APOS accept?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p><strong>Cards accepted:</strong> MasterCard ✅ | Visa ✅ | RuPay / Diners Club / JCB / UnionPay ✅ | Prepaid / Gift Card (with PIN) ✅ | <strong>Amex ❌</strong></p><p><strong>Payment modes:</strong> Credit Card ✅ | Debit Card ✅ | Dynamic QR ✅ | NFC (Tap to Pay) ✅</p><p><strong>Value Added Services:</strong> CC EMI ✅ | Brand EMI ✅ | Billing Integration ✅ | ERP Integration ✅ | Merchant Dashboard ✅</p><div class="example-box"><strong>Coming soon (WIP features)</strong>Same-day settlement, Cash at POS, DC EMI, DCC (Dynamic Currency Conversion), ICICI Pay Later — these are being built and will be available soon.</div></div></div>
+    </div>
+  </div>
+  <div class="mcq-block">
+    <div class="mcq-header">
+      <div class="mcq-badge">🎯 Quick Check</div>
+      <div class="mcq-title">POS Machine — Test Your Understanding</div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q1.</span> A customer wants to pay ₹35,000 for a washing machine using their credit card EMI at an electronics store. The merchant currently only has a QR code. What should the RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Sound Box is for audio payment confirmation — it cannot process credit card or EMI payments.',10)"><div class="option-dot">A</div>Sound Box</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'An additional QR code still only accepts UPI — it cannot process credit card EMI transactions.',10)"><div class="option-dot">B</div>Additional QR code</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! A POS machine (APOS) is needed for credit card payments and EMI options. QR codes only accept UPI, not credit card EMI.',10)"><div class="option-dot">C</div>POS Machine (APOS)</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'UPI Intent is for remote payment collection — it cannot process credit card EMI transactions.',10)"><div class="option-dot">D</div>UPI Intent</div>
+      </div>
+      <div class="mcq-feedback" id="fb-10"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q2.</span> Which of the following is NOT currently available on ICICI Bank's APOS?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'NFC is available on ICICI APOS — customers can tap their phone or card to pay.',11)"><div class="option-dot">A</div>NFC (Tap to Pay)</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Brand EMI is available on ICICI APOS — merchants can offer EMI on specific brands.',11)"><div class="option-dot">B</div>Brand EMI</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Amex Card acceptance is NOT available on ICICI APOS. All other major networks (Visa, MasterCard, RuPay, Diners, JCB, UnionPay) are accepted.',11)"><div class="option-dot">C</div>Amex Card acceptance</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Dynamic QR integration is available on ICICI APOS — customers can pay via UPI QR as well as card.',11)"><div class="option-dot">D</div>Dynamic QR integration</div>
+      </div>
+      <div class="mcq-feedback" id="fb-11"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q3.</span> What is the correct full form of APOS?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Automated Point of Sale is not the correct full form — though the device does automate many processes.',12)"><div class="option-dot">A</div>Automated Point of Sale</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! APOS stands for Android Point of Sale — it runs on Android 11 OS, making it a smart terminal, not just a card reader.',12)"><div class="option-dot">B</div>Android Point of Sale</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Advanced Payment Operating System is not the correct full form for APOS.',12)"><div class="option-dot">C</div>Advanced Payment Operating System</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Authorised POS is not the correct full form — it is simply Android Point of Sale.',12)"><div class="option-dot">D</div>Authorised POS</div>
+      </div>
+      <div class="mcq-feedback" id="fb-12"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q4.</span> An RM wants to onboard a new POS merchant. What important process rule must they keep in mind?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'POS onboarding is not open at any time — it has a controlled window and requires approval.',13)"><div class="option-dot">A</div>POS can be onboarded any day, anytime</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Retail/MES ZH approval is mandatory for every POS merchant, and the onboarding window opens only twice a month per zone per RH. RMs must plan in advance.',13)"><div class="option-dot">B</div>ZH approval is needed and the onboarding window opens only twice a month per zone</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Branch manager approval alone is not sufficient — ZH (Zonal Head) approval from Retail/MES is specifically required.',13)"><div class="option-dot">C</div>POS onboarding only requires branch manager approval</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'POS onboarding is not a self-service process — it requires RM/SM involvement and ZH approval.',13)"><div class="option-dot">D</div>POS can be self-onboarded by the merchant online</div>
+      </div>
+      <div class="mcq-feedback" id="fb-13"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q5.</span> A small street food vendor with ₹50 average bill size asks for a POS machine. What should the RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'A POS machine carries costs (setup fee, monthly rental) and ZH approval requirements — it is over-engineered for a ₹50 average bill street vendor.',14)"><div class="option-dot">A</div>POS machine — it accepts all payment types</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! A QR code (Static QR) is free, instant to set up, and perfectly sufficient for a small street vendor accepting UPI payments. POS is for higher-ticket merchants who need card acceptance.',14)"><div class="option-dot">B</div>QR code — it is free and sufficient for UPI payments at this scale</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Using both POS and QR together at this scale adds unnecessary cost and complexity for a small street vendor.',14)"><div class="option-dot">C</div>Both POS and QR together</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Sound Box alone cannot accept payments — it only announces incoming payments. The vendor still needs a QR code.',14)"><div class="option-dot">D</div>Sound Box only</div>
+      </div>
+      <div class="mcq-feedback" id="fb-14"></div>
+    </div>
+  </div>
+  <div class="dnd-block" id="dnd2">
+    <div class="dnd-header">
+      <div class="dnd-badge">🎮 Match the Merchant</div>
+      <div class="dnd-title">POS or QR? Match Each Merchant to the Right Solution</div>
+    </div>
+    <div class="dnd-instruction">💡 Drag each merchant to their best-fit primary collection solution. Think about ticket size, payment mode, and business type.</div>
+    <div class="dnd-score-display" id="dnd2-score"></div>
+    <div class="dnd-body">
+      <div class="dnd-chips-area">
+        <h4>Merchant / Situation</h4>
+        <div class="dnd-chips" id="dnd2-chips"><div class="dnd-chip" draggable="false" data-id="chip0" data-answer="pos">Jewellery store — customers pay ₹50,000+ by credit card or EMI</div><div class="dnd-chip" draggable="false" data-id="chip1" data-answer="staticqr">Street chai stall — customers pay ₹15–30 via UPI</div><div class="dnd-chip" draggable="false" data-id="chip2" data-answer="dynamicqr">Restaurant with billing software — auto-generate bill amount per table</div><div class="dnd-chip" draggable="false" data-id="chip3" data-answer="pos">Supermarket chain — card swipes + EMI + billing integration needed</div><div class="dnd-chip" draggable="false" data-id="chip4" data-answer="intent">Home delivery service — collect payment at customer's door remotely</div></div>
+      </div>
+      <div class="dnd-zones-area">
+        <h4>ICICI Solution</h4>
+        <div class="dnd-zones" id="dnd2-zones"><div class="drop-zone" data-id="pos" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd2')"><div class="zone-label">POS Machine (APOS)</div></div><div class="drop-zone" data-id="staticqr" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd2')"><div class="zone-label">Static QR</div></div><div class="drop-zone" data-id="dynamicqr" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd2')"><div class="zone-label">Dynamic QR</div></div><div class="drop-zone" data-id="intent" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd2')"><div class="zone-label">UPI Intent (SMS)</div></div></div>
+      </div>
+    </div>
+    <div class="dnd-buttons">
+      <button class="dnd-check-btn" id="dnd2-checkbtn" onclick="checkDnD('dnd2',5)">Check Answers</button>
+      <button class="dnd-reset-btn" id="dnd2-resetbtn" onclick="resetDnD('dnd2')">Try Again</button>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="light-section">
+  <div class="light-header">
+    <div class="light-number">4</div>
+    <div>
+      <div class="light-title">POS Pricing — Quick Reference</div>
+      <div class="light-subtitle">Two pricing models — know the difference</div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">💰</div>
+          <div class="faq-q-text">What is the standard POS pricing and what is the Freedom Plan?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>ICICI offers two pricing models for POS:</p><p><strong>Standard / Courier Model:</strong> Setup fee ₹225 + Monthly rental ₹99. Simple entry-level plan. Device delivered by courier.</p><p><strong>Freedom Plan SOC (Special):</strong> Pay once — no monthly rental ever.</p><table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:13px"><tr style="background:var(--orange-light)"><th style="padding:8px;text-align:left;border:1px solid var(--orange-mid)">Plan</th><th style="padding:8px;text-align:center;border:1px solid var(--orange-mid)">Option 1</th><th style="padding:8px;text-align:center;border:1px solid var(--orange-mid)">Option 2</th></tr><tr><td style="padding:8px;border:1px solid var(--border)">One-time setup fee</td><td style="padding:8px;text-align:center;border:1px solid var(--border);font-weight:600">₹7,499</td><td style="padding:8px;text-align:center;border:1px solid var(--border);font-weight:600">₹5,999</td></tr><tr><td style="padding:8px;border:1px solid var(--border)">Monthly rental</td><td style="padding:8px;text-align:center;border:1px solid var(--border);color:var(--green)">NIL</td><td style="padding:8px;text-align:center;border:1px solid var(--border);color:var(--green)">NIL</td></tr><tr><td style="padding:8px;border:1px solid var(--border)">Service charge/month</td><td style="padding:8px;text-align:center;border:1px solid var(--border);color:var(--green)">NIL</td><td style="padding:8px;text-align:center;border:1px solid var(--border);color:var(--red)">₹50</td></tr><tr><td style="padding:8px;border:1px solid var(--border)">Tenure</td><td style="padding:8px;text-align:center;border:1px solid var(--border)">48 months</td><td style="padding:8px;text-align:center;border:1px solid var(--border)">48 months</td></tr></table><div class="example-box"><strong>Smart RM tip</strong>Over 48 months, Option 2 service charge = ₹50 × 48 = ₹2,400 extra. Total effective cost of Option 2 = ₹8,399 vs Option 1 at ₹7,499. A long-term merchant should pick Option 1.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">⚠️</div>
+          <div class="faq-q-text">What happens if the merchant does not use the POS machine or loses it?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p><strong>Non-Usage Charges (per terminal):</strong></p><ul><li>Spends less than ₹1,000 → ₹249/month penalty</li><li>Spends ₹1,000–₹25,000 → ₹199/month penalty</li><li>Spends above ₹25,000 → NIL (no penalty)</li></ul><p><strong>Lost Terminal Charge:</strong> ₹10,000 per terminal. The POS machine is ICICI Bank's property — if lost or stolen, the merchant pays replacement cost.</p><div class="example-box"><strong>RM must communicate this clearly at onboarding</strong>Before deploying a POS, always tell the merchant: "This machine belongs to the bank. Keep it secure. If it is stolen, file a police FIR immediately and inform us. Non-usage charges apply if the machine sits idle." This prevents complaints later.</div></div></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="topic-section">
+  <div class="topic-header">
+    <div class="topic-number">5</div>
+    <div>
+      <div class="topic-title">Eazypay Classic — Online & Offline Payment Collection</div>
+      <div class="topic-subtitle">4 modes for every merchant — with or without a website</div>
+    </div>
+  </div>
+  <div class="merchant-box">
+    <div class="merchant-emoji">🏫</div>
+    <div>
+      <div class="merchant-label">Meet the Merchant</div>
+      <div class="merchant-story"><strong>Priya manages a school with 800 students.</strong> Every term she has to collect fees from 800 families. She currently does this by sending individual WhatsApp messages asking parents to pay. Some pay by NEFT, some by cheque, some are always late. She has no way to send automated reminders or track who has paid. She does not have a school website. <strong>Eazypay Classic solves Priya's problem — and it works for merchants with or without a website.</strong></div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">💡</div>
+          <div class="faq-q-text">What is Eazypay Classic and what makes it different from just having a QR code?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>Eazypay Classic is ICICI Bank's <strong>Payment Gateway product</strong> that enables merchants to collect payments through multiple modes — online and offline. Unlike QR/POS which collect money in-person, Eazypay Classic collects money <strong>without the customer being physically present</strong>.</p><p>It supports: Credit Cards, Debit Cards, UPI, Netbanking, NEFT/RTGS, Cash/Cheque, and International Cards.</p><p>The key differentiator: <strong>it works with OR without a merchant website</strong> — making it accessible to schools, NGOs, service providers, and small businesses with no tech setup.</p><div class="example-box"><strong>QR vs Eazypay — simply put</strong>QR = customer comes to your shop and scans a code.<br>Eazypay Classic = customer is sitting at home, gets a link or sees your name on the portal, and pays — you never even meet them.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🌐</div>
+          <div class="faq-q-text">Mode 1 — Payment Gateway (PG) Mode: Which merchant needs this?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>PG Mode is for merchants who <strong>have a website or mobile app</strong>. ICICI's payment gateway is directly integrated into the website. When a customer shops on the website and reaches the checkout page, they see all payment options — cards, UPI, netbanking, wallets.</p><p>Features: iOS and Android integration, 3 plugins (WordPress, Magento), 4 language support, Intelligent Retry (failed payments auto-retried), daily MIS, merchant dashboard.</p><div class="example-box"><strong>Who needs PG Mode?</strong>An e-commerce clothing brand selling online. A healthcare startup with an app for doctor appointments. Any business with an online storefront where customers shop and pay digitally.<br><br><strong>Key feature — Intelligent Retry:</strong> If a customer's UPI payment fails mid-transaction, ICICI's PG automatically retries it. This reduces lost sales — a direct revenue benefit for the merchant.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">📧</div>
+          <div class="faq-q-text">Mode 2 — CIB/Bill Upload: Perfect for which merchant?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>CIB/Bill Upload is for merchants who <strong>need to bill a large number of customers at once</strong> — without a website. The merchant uploads a file (with customer names and amounts) into Corporate Internet Banking. ICICI generates individual payment links and sends them to each customer. Customers click the link and pay at <em>www.eazypay.icicibank.com</em>.</p><p>Feature: Automated <strong>reminder alerts</strong> sent to customers before the payment due date.</p><div class="example-box"><strong>Perfect for Priya's school</strong>Priya uploads one file with all 800 student names and fee amounts. ICICI generates 800 individual payment links and sends them to each parent. Parents get reminders 3 days before due date. Priya gets a real-time dashboard showing who has paid and who hasn't. Zero manual follow-up.</div><p style="margin-top:10px">Best for: <span class="tag">Schools</span><span class="tag">Service providers</span><span class="tag">Housing societies</span><span class="tag">Insurance companies</span></p></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🔗</div>
+          <div class="faq-q-text">Mode 3 — OTC (Over The Counter): When is this the right choice?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>OTC is for merchants who <strong>deal with customers over the phone or without a website</strong>. The merchant generates a payment link on the spot for one specific customer and sends it via SMS or email. Customer clicks and pays.</p><p>Special feature: The merchant can <strong>restrict payment mode per customer</strong> — e.g., only UPI for one customer, only debit card for another, or all modes for everyone.</p><div class="example-box"><strong>Who uses OTC?</strong>A telemarketing company (like Tele-Deals in the ICICI case study) takes product orders over the phone. For every order, they send a separate payment link with an expiry date. Customer pays at their convenience. Zero physical card needed. Exactly like sending a payment link on WhatsApp — but ICICI's secure, tracked version.</div><p style="margin-top:10px">Best for: <span class="tag">Telesales</span><span class="tag">CNP transactions</span><span class="tag">Service-based businesses</span><span class="tag">Travel agents</span></p></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">💝</div>
+          <div class="faq-q-text">Mode 4 — Open/Push Mode: Who uses this and why?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>Open/Push is for merchants who want <strong>one open payment link shared with everyone</strong> — where the customer decides the amount they want to pay. There is no fixed invoice or amount.</p><div class="example-box"><strong>The NGO use case</strong>Helping Hands NGO shares one donation link on social media: "Click here to donate." Anyone who wants to donate clicks, enters ₹100 or ₹5,000 — whatever they wish — and pays. No individual invoices, no fixed amounts. The NGO's name appears searchable on www.eazypay.icicibank.com so anyone can find and donate.</div><p style="margin-top:10px">Best for: <span class="tag">NGOs</span><span class="tag">Charity organizations</span><span class="tag">Crowdfunding</span><span class="tag">Religious trusts</span></p></div></div>
+    </div>
+  </div>
+  <div class="mcq-block">
+    <div class="mcq-header">
+      <div class="mcq-badge">🎯 Quick Check</div>
+      <div class="mcq-title">Eazypay Classic — Test Your Understanding</div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q1.</span> A school with 600 students needs to collect term fees from all parents. The school has no website. Which Eazypay mode should the RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'PG Mode requires a merchant website or app for direct integration — the school has neither.',15)"><div class="option-dot">A</div>PG Mode (Payment Gateway)</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! CIB/Bill Upload allows the school to upload one file with all 600 parent details. ICICI generates individual payment links and sends them with automatic reminders. No website needed.',15)"><div class="option-dot">B</div>CIB/Bill Upload</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'OTC is for individual transaction links sent one at a time — impractical for 600 students at once.',15)"><div class="option-dot">C</div>OTC (Over The Counter)</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Open/Push Mode is for open donations where the payer decides the amount — not suitable for specific fee amounts per student.',15)"><div class="option-dot">D</div>Open/Push Mode</div>
+      </div>
+      <div class="mcq-feedback" id="fb-15"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q2.</span> Kurteez is an online clothing brand with a website and app. They want customers to pay using cards, UPI, and net banking during checkout. Which Eazypay mode should the RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Open/Push is for open donation-style links — not suitable for an e-commerce checkout flow.',16)"><div class="option-dot">A</div>Open/Push Mode</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'CIB/Bill Upload is for sending individual payment links to customers — not for website checkout integration.',16)"><div class="option-dot">B</div>CIB/Bill Upload</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! PG Mode directly integrates with the merchant's website and app, enabling all payment modes at checkout. ICICI's PG supports WordPress and Magento plugins, iOS and Android SDKs.',16)"><div class="option-dot">C</div>PG Mode (Payment Gateway)</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'OTC is for sending individual payment links — not for a website checkout where all customers can pay automatically.',16)"><div class="option-dot">D</div>OTC (Over The Counter)</div>
+      </div>
+      <div class="mcq-feedback" id="fb-16"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q3.</span> Tele-Deals takes product orders over the phone and needs to send a separate payment link with an expiry date for each order. Which Eazypay mode is correct?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Open/Push is for a single open link for everyone — not for individual order-specific links with expiry dates.',17)"><div class="option-dot">A</div>Open/Push Mode</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'CIB/Bill Upload is for bulk billing of a large customer base — not for individual transaction-level links.',17)"><div class="option-dot">B</div>CIB/Bill Upload</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'PG Mode requires a website/app integration — Tele-Deals works over the phone without a customer website.',17)"><div class="option-dot">C</div>PG Mode</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! OTC allows Tele-Deals to generate one payment link per order, send it via SMS/email, and set an expiry date. Customer can choose the payment mode they prefer.',17)"><div class="option-dot">D</div>OTC (Over The Counter)</div>
+      </div>
+      <div class="mcq-feedback" id="fb-17"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q4.</span> Which feature of ICICI Bank's Payment Gateway helps reduce lost sales when a customer's payment fails mid-transaction?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Maker-Checker is an authorization workflow for payments — it does not help with failed transaction recovery.',18)"><div class="option-dot">A</div>Maker-Checker</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Intelligent Retry automatically retries a failed payment transaction — reducing the number of lost sales due to payment failures.',18)"><div class="option-dot">B</div>Intelligent Retry</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Auto Settlement is for end-of-day settlement processing — it does not help recover failed transactions.',18)"><div class="option-dot">C</div>Auto Settlement</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Expression QR is a branded QR code design tool — it is not related to payment gateway features.',18)"><div class="option-dot">D</div>Expression QR</div>
+      </div>
+      <div class="mcq-feedback" id="fb-18"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q5.</span> An NGO wants to accept donations of any amount from the general public without sending individual invoices. Which Eazypay mode suits them best?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'PG Mode requires a website and generates structured checkout flows — not suitable for open donation collection.',19)"><div class="option-dot">A</div>PG Mode</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'CIB/Bill Upload is for billing specific amounts to specific people — not for open-ended donations.',19)"><div class="option-dot">B</div>CIB/Bill Upload</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'OTC generates one link per customer with a specific amount — not suitable for variable-amount donations from the general public.',19)"><div class="option-dot">C</div>OTC (Over The Counter)</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Open/Push Mode creates one open link where the payer decides the amount. Perfect for NGO donations, charity collections, and crowdfunding.',19)"><div class="option-dot">D</div>Open/Push Mode</div>
+      </div>
+      <div class="mcq-feedback" id="fb-19"></div>
+    </div>
+  </div>
+  <div class="dnd-block" id="dnd3">
+    <div class="dnd-header">
+      <div class="dnd-badge">🎮 Match the Merchant</div>
+      <div class="dnd-title">Match the Merchant to the Right Eazypay Mode</div>
+    </div>
+    <div class="dnd-instruction">💡 Drag each merchant to the Eazypay Classic mode that best fits their business need.</div>
+    <div class="dnd-score-display" id="dnd3-score"></div>
+    <div class="dnd-body">
+      <div class="dnd-chips-area">
+        <h4>Merchant / Situation</h4>
+        <div class="dnd-chips" id="dnd3-chips"><div class="dnd-chip" draggable="false" data-id="chip0" data-answer="pgmode">E-commerce brand — customers pay on website during online checkout</div><div class="dnd-chip" draggable="false" data-id="chip1" data-answer="billupload">Housing society — collect maintenance fees from 200 residents monthly</div><div class="dnd-chip" draggable="false" data-id="chip2" data-answer="otc">Travel agent — sends individual payment link via WhatsApp for each booking</div><div class="dnd-chip" draggable="false" data-id="chip3" data-answer="openpush">Religious trust — accepts variable donations from public, no fixed amount</div></div>
+      </div>
+      <div class="dnd-zones-area">
+        <h4>ICICI Solution</h4>
+        <div class="dnd-zones" id="dnd3-zones"><div class="drop-zone" data-id="pgmode" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd3')"><div class="zone-label">PG Mode (website integration)</div></div><div class="drop-zone" data-id="billupload" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd3')"><div class="zone-label">CIB / Bill Upload</div></div><div class="drop-zone" data-id="otc" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd3')"><div class="zone-label">OTC (Over The Counter)</div></div><div class="drop-zone" data-id="openpush" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd3')"><div class="zone-label">Open / Push Mode</div></div></div>
+      </div>
+    </div>
+    <div class="dnd-buttons">
+      <button class="dnd-check-btn" id="dnd3-checkbtn" onclick="checkDnD('dnd3',4)">Check Answers</button>
+      <button class="dnd-reset-btn" id="dnd3-resetbtn" onclick="resetDnD('dnd3')">Try Again</button>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="topic-section">
+  <div class="topic-header">
+    <div class="topic-number">6</div>
+    <div>
+      <div class="topic-title">E-Collection — Tracking Who Paid What via NEFT/RTGS</div>
+      <div class="topic-subtitle">For businesses that receive large bank transfers and struggle to identify which customer paid</div>
+    </div>
+  </div>
+  <div class="merchant-box">
+    <div class="merchant-emoji">🏭</div>
+    <div>
+      <div class="merchant-label">Meet the Merchant</div>
+      <div class="merchant-story"><strong>Suresh runs a wholesale distribution business.</strong> 80 retailers transfer money to his account every month via NEFT or RTGS. When ₹3 lakh appears in his account, he has no idea which retailer sent it. His accounts team spends 3 days every month calling each retailer to confirm payments. Some payments are mismatched. Reconciliation is a nightmare. <strong>E-Collection gives each of Suresh's 80 retailers their own unique account number — and Suresh instantly knows who paid what.</strong></div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🔢</div>
+          <div class="faq-q-text">What is E-Collection and how does the Virtual Account Number system work?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>E-Collection is an ICICI Bank solution that gives each payer (vendor, retailer, customer) a <strong>unique Virtual Account Number (VAN)</strong>. When this payer sends NEFT/RTGS/IMPS, they use this VAN instead of the merchant's actual account number.</p><p>The VAN is structured as: <strong>Client Code + Vendor Code</strong>. ICICI Bank's system reads this combination and instantly identifies which payer the money came from — before crediting it to the merchant's main current account.</p><div class="example-box"><strong>How it works for Suresh</strong>Suresh gets a unique VAN for each of his 80 retailers: Retailer 1 gets VAN-001, Retailer 2 gets VAN-002, etc. When Retailer 47 transfers ₹3 lakh, ICICI reads VAN-047 and knows it's from Retailer 47. Suresh's account gets credited AND he gets a customized MIS report showing: Retailer 47 paid ₹3 lakh at 11:34 AM. Zero confusion. Zero calls.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">📋</div>
+          <div class="faq-q-text">What does the MIS report look like and how does it help the merchant?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>ICICI sends a <strong>customized MIS report hourly or at end-of-day</strong> with all transaction details — payer name, amount, time, and VAN. This report can be directly uploaded into the merchant's accounting software for auto-reconciliation.</p><p>Additional features:</p><ul><li>Option to send payment confirmation to each payer automatically</li><li>MIS at hierarchy level — branch-wise, region-wise, distributor-wise</li><li>Real-time ERP update possible via H2H or API integration</li></ul><div class="example-box"><strong>Time saved for Suresh</strong>Before E-Collection: 3 days per month spent on reconciliation. After E-Collection: MIS auto-generated, uploaded directly into accounting software. Reconciliation done in minutes — not days.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">💬</div>
+          <div class="faq-q-text">How does an RM identify a merchant who needs E-Collection? What questions to ask?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>Ask these probing questions:</p><ul><li>"Is reconciliation of payments a problem in your business?"</li><li>"Do you face challenges in identifying which customer sent a bank transfer?"</li><li>"Do your customers (payers) get timely updates on whether their payment was received?"</li><li>"Do you find the cost of setting up collection infrastructure high?"</li></ul><p>If the merchant answers "yes" to any of these — E-Collection is the right conversation.</p><div class="example-box"><strong>Pitch to Suresh</strong>"Sir, instead of calling 80 retailers every month to confirm payments, what if each retailer had their own unique payment number and you got a report every hour showing exactly who paid what? That's ICICI E-Collection."</div></div></div>
+    </div>
+  </div>
+  <div class="mcq-block">
+    <div class="mcq-header">
+      <div class="mcq-badge">🎯 Quick Check</div>
+      <div class="mcq-title">E-Collection — Test Your Understanding</div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q1.</span> A wholesale trader receives NEFT payments from 100+ retailers every month. He cannot identify which retailer sent which payment. What ICICI solution should the RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'POS Machine is for in-person card payments — not for identifying NEFT bank transfers.',20)"><div class="option-dot">A</div>POS Machine</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'QR/UPI handles in-person digital payments — not for identifying bulk NEFT transfers from multiple parties.',20)"><div class="option-dot">B</div>QR/UPI</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! E-Collection gives each retailer a unique Virtual Account Number. When they transfer NEFT/RTGS, ICICI identifies the payer automatically and sends a reconciliation report.',20)"><div class="option-dot">C</div>E-Collection with Virtual Account Numbers</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'BizPay360 is for making bulk payments out — not for receiving and identifying incoming bank transfers.',20)"><div class="option-dot">D</div>BizPay360</div>
+      </div>
+      <div class="mcq-feedback" id="fb-20"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q2.</span> In E-Collection, what is a Virtual Account Number (VAN) made up of?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Mobile number and IFSC code are standard banking details — not the structure of a VAN in E-Collection.',21)"><div class="option-dot">A</div>Customer's mobile number and IFSC code</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! The VAN in E-Collection is structured as Client Code + Vendor Code. This combination tells ICICI exactly which merchant and which specific payer the payment is from.',21)"><div class="option-dot">B</div>Client Code + Vendor Code</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Account number and branch code are standard details — they do not uniquely identify the payer in E-Collection.',21)"><div class="option-dot">C</div>Account number + branch code</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'VANs are not random — they are structured combinations of Client Code and Vendor Code for systematic identification.',21)"><div class="option-dot">D</div>Random number assigned by the bank</div>
+      </div>
+      <div class="mcq-feedback" id="fb-21"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q3.</span> How frequently does ICICI Bank send the MIS report to a merchant enrolled in E-Collection?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Monthly MIS would be too infrequent for real-time payment tracking — E-Collection offers much more frequent reporting.',22)"><div class="option-dot">A</div>Only once a month</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Weekly reporting is not offered for E-Collection — it provides more frequent and customizable reporting options.',22)"><div class="option-dot">B</div>Weekly on Mondays</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! E-Collection MIS is sent hourly or at end-of-day basis — customized per the merchant's requirement, with all transaction details for reconciliation.',22)"><div class="option-dot">C</div>Hourly or at end-of-day (merchant's choice)</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'E-Collection MIS is automatic and scheduled — the merchant does not need to manually request it each time.',22)"><div class="option-dot">D</div>Only when the merchant requests it</div>
+      </div>
+      <div class="mcq-feedback" id="fb-22"></div>
+    </div>
+  </div>
+  <div class="dnd-block" id="dnd4">
+    <div class="dnd-header">
+      <div class="dnd-badge">🎮 Match the Merchant</div>
+      <div class="dnd-title">Which Merchant Has an E-Collection Problem?</div>
+    </div>
+    <div class="dnd-instruction">💡 Drag the merchant scenarios to the right category — who needs E-Collection, and who does not.</div>
+    <div class="dnd-score-display" id="dnd4-score"></div>
+    <div class="dnd-body">
+      <div class="dnd-chips-area">
+        <h4>Merchant / Situation</h4>
+        <div class="dnd-chips" id="dnd4-chips"><div class="dnd-chip" draggable="false" data-id="chip0" data-answer="needs">Hotel receiving advance bookings via NEFT from 50 travel agents monthly</div><div class="dnd-chip" draggable="false" data-id="chip1" data-answer="notneed">Tea stall collecting ₹20–₹50 from walkin customers by UPI</div><div class="dnd-chip" draggable="false" data-id="chip2" data-answer="needs">Distributor getting RTGS transfers from 100 dealers — cannot identify who paid</div><div class="dnd-chip" draggable="false" data-id="chip3" data-answer="notneed">Restaurant where customers pay by card and QR at the counter</div></div>
+      </div>
+      <div class="dnd-zones-area">
+        <h4>ICICI Solution</h4>
+        <div class="dnd-zones" id="dnd4-zones"><div class="drop-zone" data-id="needs" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd4')"><div class="zone-label">Needs E-Collection</div></div><div class="drop-zone" data-id="notneed" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd4')"><div class="zone-label">Does NOT need E-Collection</div></div></div>
+      </div>
+    </div>
+    <div class="dnd-buttons">
+      <button class="dnd-check-btn" id="dnd4-checkbtn" onclick="checkDnD('dnd4',4)">Check Answers</button>
+      <button class="dnd-reset-btn" id="dnd4-resetbtn" onclick="resetDnD('dnd4')">Try Again</button>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="light-section">
+  <div class="light-header">
+    <div class="light-number">7</div>
+    <div>
+      <div class="light-title">Door Step Banking (DSB)</div>
+      <div class="light-subtitle">When the merchant cannot come to the bank — the bank comes to them</div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🚐</div>
+          <div class="faq-q-text">What is Door Step Banking and which merchant would actually use it?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>Door Step Banking (GBO DSB) is an ICICI service where a bank-assigned agency <strong>visits the merchant's premises</strong> to pick up or deliver cash, or to pick up cheques — eliminating the need for the merchant to visit the bank branch.</p><p>Two service types: <strong>Fixed Beat</strong> (agency visits daily at a fixed time — for high-volume daily cash merchants) and <strong>On Call</strong> (merchant requests as needed).</p><div class="example-box"><strong>Who needs this?</strong>A large supermarket or petrol pump collecting ₹5–10 lakhs in cash daily. Sending a staff member to the bank every day is risky (cash in transit), expensive (manpower), and time-consuming. With DSB, the bank comes to them — safe, scheduled, and professional. Also useful for businesses that issue a large number of cheques and need them picked up for deposit.</div></div></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="topic-section">
+  <div class="topic-header">
+    <div class="topic-number">8</div>
+    <div>
+      <div class="topic-title">BizPay360 vs I-Multipay — Paying Vendors, Staff and Suppliers</div>
+      <div class="topic-subtitle">Two ICICI products for outgoing payments — learn which merchant needs which</div>
+    </div>
+  </div>
+  <div class="merchant-box">
+    <div class="merchant-emoji">🚚</div>
+    <div>
+      <div class="merchant-label">Meet the Merchant</div>
+      <div class="merchant-story"><strong>Kavitha runs a logistics company with 150 delivery partners and 30 vendors.</strong> Every month she pays delivery partners their incentives (hundreds of small payments), pays vendors for fuel and maintenance, and makes a few large one-off payments. Some vendors still insist on receiving a physical cheque. Her accounts team manually initiates each payment in internet banking — it takes 3 days every month. <strong>ICICI has two products that solve this: BizPay360 for digital bulk payments and I-Multipay for complex needs including physical cheques.</strong></div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">💸</div>
+          <div class="faq-q-text">What is BizPay360 and which merchant is it perfect for?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>BizPay360 is ICICI's <strong>digital bulk payment platform</strong>. A merchant uploads one file and hundreds of payments — NEFT, RTGS, IMPS — go out simultaneously. No need to initiate each payment one by one.</p><p>Key features:</p><ul><li><strong>Instant digital activation</strong> — no paperwork, start immediately</li><li><strong>Choose debit type</strong> — consolidated (one debit for all) or individual (separate debit per payment) — in the same file</li><li><strong>Macro-based validation</strong> — catches errors in the file before payments go out</li><li><strong>DIY customization</strong> — merchant can change file formats, settings themselves</li><li><strong>MIS download</strong> in Excel, Text, or PDF</li><li><strong>Up to 10 on-screen payments</strong> with a single OTP</li></ul><div class="example-box"><strong>Kavitha's use case with BizPay360</strong>Kavitha uploads one file with 150 delivery partner payments (individual debit — one entry per person) and 30 vendor payments (consolidated debit — one combined entry). Both in the same file. All 180 payments go out together. Her bank statement is clean, traceable, and reconciled automatically. What took 3 days now takes 30 minutes.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🏢</div>
+          <div class="faq-q-text">What is I-Multipay and what does it offer that BizPay360 cannot?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>I-Multipay is ICICI's <strong>enterprise-grade payment solution</strong> for businesses with complex payment needs. The key differentiator: <strong>I-Multipay supports physical payment instruments</strong> — Cheques, Demand Drafts (DD), and Internet Based Cheque Writing (IBCW).</p><p>Additional features BizPay360 does NOT have:</p><ul><li>Single file with <strong>more than 2,000 transactions</strong></li><li><strong>Host-to-Host (H2H) integration</strong> — server-to-server automatic file transfer</li><li><strong>Customized SMS/Email alerts</strong> to each payee after payment</li><li><strong>ERP customization</strong> — the system adapts to the merchant's existing ERP format</li><li><strong>Scheduled future date payments</strong></li><li><strong>Beneficiary validation</strong> before payment is sent</li></ul><div class="example-box"><strong>Kavitha's vendor who needs a cheque</strong>Three of Kavitha's vendors refuse to accept electronic payments — they want a physical cheque. With I-Multipay, Kavitha can issue unlimited cheques printed at ICICI Bank's location. The vendor gets the cheque — Kavitha does not have to visit a bank to issue it.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🖨️</div>
+          <div class="faq-q-text">What are I-Multipay's physical payment products — Cheque, DD, and IBCW?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>I-Multipay handles physical payments through three modes:</p><ul><li><strong>Cheque Printing (RCP_CC) & Demand Draft (DD)</strong> — Printed at ICICI Bank's location. Unlimited quantity. Positive Pay validation at clearing for security.</li><li><strong>IBCW (Internet Based Cheque Writing)</strong> — The merchant prints the cheque at their own premises through a web browser. The HO uploads the file; any branch location can print. No delivery time — faster than waiting for bank-printed cheques.</li></ul><div class="example-box"><strong>Company with multiple offices — IBCW solves a real problem</strong>A company has offices in Mumbai, Delhi, and Hyderabad. They upload one cheque file from Mumbai HQ. Vendors in all three cities get cheques printed locally at each office. No courier, no delay, no centralized queues.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🔍</div>
+          <div class="faq-q-text">How does an RM decide between BizPay360 and I-Multipay? What is the decision rule?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>The decision is simple — ask the merchant these questions:</p><ul><li>"Do you need to issue physical cheques or Demand Drafts to any vendors?" → <strong>I-Multipay</strong></li><li>"Do you have more than 2,000 transactions in a single payment file?" → <strong>I-Multipay</strong></li><li>"Do you need your ERP system to connect directly to the bank for payments?" → <strong>I-Multipay</strong></li><li>"Do you want a simple digital bulk payment tool that can be activated today?" → <strong>BizPay360</strong></li></ul><div class="example-box"><strong>The simple rule</strong>BizPay360 = Digital-first, self-serve, fast to activate. Perfect for most SMEs and mid-size businesses.<br><br>I-Multipay = Enterprise-grade, handles physical payments, large volumes, ERP integration. For bigger, more complex businesses.</div></div></div>
+    </div>
+  </div>
+  <div class="mcq-block">
+    <div class="mcq-header">
+      <div class="mcq-badge">🎯 Quick Check</div>
+      <div class="mcq-title">BizPay360 vs I-Multipay — Test Your Understanding</div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q1.</span> A mid-size garment manufacturer wants to pay 80 vendor payments and 200 worker salaries every month via digital bank transfer. They want instant digital setup and a simple MIS. Which product should the RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'I-Multipay is for enterprise-grade needs with physical payment requirements or large volumes — this merchant's needs are straightforward digital payments.',23)"><div class="option-dot">A</div>I-Multipay</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! BizPay360 is perfect here — instant digital activation, bulk file upload, individual and consolidated debit options, simple MIS. Exactly what this manufacturer needs.',23)"><div class="option-dot">B</div>BizPay360</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'E-Collection is for receiving payments — not for making payments to vendors and workers.',23)"><div class="option-dot">C</div>E-Collection</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'POS Machine is for collecting card payments from customers — not for paying vendors and workers.',23)"><div class="option-dot">D</div>POS Machine</div>
+      </div>
+      <div class="mcq-feedback" id="fb-23"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q2.</span> A large FMCG distributor has 3,500 vendor transactions per month. Some vendors insist on receiving physical cheques. Which product must the RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'BizPay360 cannot handle files with more than 2,000 transactions, and it does not support physical cheque issuance.',24)"><div class="option-dot">A</div>BizPay360</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Tally Plugin is for connecting accounting software to the bank — not specifically for bulk payment processing.',24)"><div class="option-dot">B</div>Tally Plugin</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! I-Multipay handles files with more than 2,000 transactions AND supports physical cheque and DD issuance. Both conditions match I-Multipay.',24)"><div class="option-dot">C</div>I-Multipay</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'E-Collection is for receiving payments, not making them.',24)"><div class="option-dot">D</div>E-Collection</div>
+      </div>
+      <div class="mcq-feedback" id="fb-24"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q3.</span> What is the key advantage of IBCW (Internet Based Cheque Writing) over standard cheque printing at the bank?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Cost comparison is not the primary advantage of IBCW over standard cheque printing.',25)"><div class="option-dot">A</div>It is cheaper than regular cheques</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! IBCW allows cheque printing at the client's own premises — the HO uploads the file and any branch office can print locally. No delivery time, no geographic constraint.',25)"><div class="option-dot">B</div>Cheques are printed at the client's own premises — faster and wider geographical reach</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'IBCW is internet-based — it requires an internet connection for cheque writing and printing.',25)"><div class="option-dot">C</div>It requires no internet connection</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'IBCW handles domestic cheque printing — it is not designed for international payment processing.',25)"><div class="option-dot">D</div>It can handle international payments</div>
+      </div>
+      <div class="mcq-feedback" id="fb-25"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q4.</span> Kavitha wants her logistics ERP system to automatically send payment files to ICICI Bank every night without anyone logging into internet banking. Which feature of I-Multipay enables this?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Maker-Checker is an authorization workflow — it does not automate file transfer between ERP and bank.',26)"><div class="option-dot">A</div>Maker-Checker</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Intelligent Retry is a Payment Gateway feature for recovering failed transactions — not for ERP-to-bank file transfer.',26)"><div class="option-dot">B</div>Intelligent Retry</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! H2H (Host-to-Host) integration in I-Multipay enables server-to-server automatic file transfer between the client's ERP and ICICI Bank — with zero manual intervention.',26)"><div class="option-dot">C</div>Host-to-Host (H2H) integration</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Auto Settlement is a POS feature for end-of-day card transaction processing — not related to ERP payment automation.',26)"><div class="option-dot">D</div>Auto Settlement</div>
+      </div>
+      <div class="mcq-feedback" id="fb-26"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q5.</span> Which of the following is available in BizPay360 but NOT in I-Multipay?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Physical cheque issuance is available in I-Multipay — it is actually one of I-Multipay's exclusive features that BizPay360 does not have.',27)"><div class="option-dot">A</div>Physical cheque issuance</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Host-to-Host integration is available in I-Multipay — it is another I-Multipay exclusive that BizPay360 does not support.',27)"><div class="option-dot">B</div>Host-to-Host integration</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Instant digital activation (DIY — Do It Yourself) is available in BizPay360 but NOT in I-Multipay. I-Multipay requires a setup process and is not DIY.',27)"><div class="option-dot">C</div>Instant digital activation (DIY)</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Files with more than 2,000 transactions are supported by I-Multipay — BizPay360 has a limit on file size.',27)"><div class="option-dot">D</div>Files with more than 2,000 transactions</div>
+      </div>
+      <div class="mcq-feedback" id="fb-27"></div>
+    </div>
+  </div>
+  <div class="dnd-block" id="dnd5">
+    <div class="dnd-header">
+      <div class="dnd-badge">🎮 Match the Merchant</div>
+      <div class="dnd-title">BizPay360 or I-Multipay? Match Each Payment Need</div>
+    </div>
+    <div class="dnd-instruction">💡 Drag each payment need to the correct ICICI product — BizPay360 or I-Multipay.</div>
+    <div class="dnd-score-display" id="dnd5-score"></div>
+    <div class="dnd-body">
+      <div class="dnd-chips-area">
+        <h4>Merchant / Situation</h4>
+        <div class="dnd-chips" id="dnd5-chips"><div class="dnd-chip" draggable="false" data-id="chip0" data-answer="imultipay">Company needs to issue physical cheques to 20 vendors who refuse digital payments</div><div class="dnd-chip" draggable="false" data-id="chip1" data-answer="bizpay360">Startup wants to pay 50 freelancers via NEFT — needs instant activation today</div><div class="dnd-chip" draggable="false" data-id="chip2" data-answer="imultipay">Large company has 4,000 payment transactions per month — needs one bulk file</div><div class="dnd-chip" draggable="false" data-id="chip3" data-answer="bizpay360">School wants to pay teacher salaries digitally — simple setup, no ERP</div><div class="dnd-chip" draggable="false" data-id="chip4" data-answer="imultipay">Manufacturer wants ERP system to auto-send payment file to bank every night</div></div>
+      </div>
+      <div class="dnd-zones-area">
+        <h4>ICICI Solution</h4>
+        <div class="dnd-zones" id="dnd5-zones"><div class="drop-zone" data-id="bizpay360" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd5')"><div class="zone-label">BizPay360</div></div><div class="drop-zone" data-id="imultipay" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd5')"><div class="zone-label">I-Multipay</div></div></div>
+      </div>
+    </div>
+    <div class="dnd-buttons">
+      <button class="dnd-check-btn" id="dnd5-checkbtn" onclick="checkDnD('dnd5',5)">Check Answers</button>
+      <button class="dnd-reset-btn" id="dnd5-resetbtn" onclick="resetDnD('dnd5')">Try Again</button>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="topic-section">
+  <div class="topic-header">
+    <div class="topic-number">9</div>
+    <div>
+      <div class="topic-title">Tally Bank Plugin — Banking Inside Your Accounting Software</div>
+      <div class="topic-subtitle">For any business using Tally or Busy — eliminate the need to log into internet banking separately</div>
+    </div>
+  </div>
+  <div class="merchant-box">
+    <div class="merchant-emoji">📊</div>
+    <div>
+      <div class="merchant-label">Meet the Merchant</div>
+      <div class="merchant-story"><strong>Ramesh's accounts team uses Tally for all accounting.</strong> Every morning they open Tally, export a payment file, log into ICICI CIB, upload the file, wait for processing, then log back into Tally to manually update which payments went through. Then they download the bank statement separately to reconcile. This back-and-forth between Tally and the bank happens 3–4 times a day. <strong>Tally Bank Plugin eliminates all of this — banking happens inside Tally itself.</strong></div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🔌</div>
+          <div class="faq-q-text">What is the Tally Bank Plugin and how does it work?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>Tally Bank Plugin is a plugin installed directly inside Tally (or Busy) accounting software. It creates a <strong>live connection between the merchant's Tally and their ICICI Bank account</strong> using real-time API integration.</p><p>Once installed, the merchant never has to leave Tally for banking — they can make payments, check balance, reconcile accounts, and pay GST all from inside Tally.</p><p>Supported software: <strong>Tally Prime (any version) | Tally ERP 9 (version 6.6.3+) | Busy (version 18+)</strong></p><div class="example-box"><strong>Think of it like this</strong>Before Plugin: Tally and ICICI Bank are two separate apps on your computer. You have to copy-paste data between them.<br><br>After Plugin: Tally and ICICI Bank are merged into one. You work in one place — everything syncs automatically.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">✅</div>
+          <div class="faq-q-text">What exactly can a merchant do through the Tally Bank Plugin?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p><ul><li><strong>Fetch Account Balance</strong> — see live bank balance inside Tally before making any payment</li><li><strong>Fetch Bank Statement</strong> — pull bank statement directly into Tally without downloading from CIB</li><li><strong>Direct Vendor Payments with auto-reconciliation</strong> — pay vendors from inside Tally; Tally auto-creates vouchers and reconciles immediately</li><li><strong>Seamless Bank Reconciliation with auto-voucher generation</strong> — no more manual entry of payment statuses</li><li><strong>Direct GST Payments with auto-reconciliation</strong> — pay GST from Tally with auto-reconciliation (Tally only, not Busy)</li></ul></p><div class="example-box"><strong>What changes for Ramesh</strong>Before: 3–4 daily round trips between Tally and CIB. After: Everything done inside Tally. Bank balance visible before making payment. Vendor payment initiated from Tally → payment goes out → Tally auto-creates voucher → bank statement auto-reconciled. Ramesh's team saves 2–3 hours every day.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">👤</div>
+          <div class="faq-q-text">Which merchants are eligible for Tally Bank Plugin? What are the must-check pre-conditions?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>Before recommending Tally Plugin, verify ALL of these:</p><ul><li>Is the merchant an <strong>ICICI Bank Current Account</strong> holder? ✅</li><li>Do they have access to <strong>Corporate Internet Banking (CIB)</strong>? ✅</li><li>Do they have <strong>transaction access</strong> on CIB (not just view access)? ✅</li><li>Are they using <strong>Tally Prime (any version)</strong>, <strong>Tally ERP 9 (6.6.3+)</strong>, or <strong>Busy (version 18+)</strong>? ✅</li></ul><div class="example-box"><strong>RM checklist question to ask the merchant</strong>"Do you use Tally or Busy for your accounting?" If yes — "Which version?" If they qualify on version AND have a CIB account, the Bank Plugin is an instant win for them. Onboarding is completely DIY, instant, and paperless.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🔐</div>
+          <div class="faq-q-text">What are the advantages of Tally Bank Plugin over doing banking on CIB separately?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p><strong>6 key advantages:</strong></p><ul><li><strong>Banking and accounting from one platform</strong> — no switching, no copy-pasting</li><li><strong>2-Factor Authorization</strong> — all transactions still require OTP, maintaining full security</li><li><strong>Current Account Mode of Operations embedded</strong> — Maker-Checker workflow works inside Tally</li><li><strong>Seamless end-to-end reconciliation</strong> — auto-matches bank entries with Tally books</li><li><strong>Low technical skill requirement</strong> — the accountant can operate it; no IT team needed</li><li><strong>Saves time and effort</strong> — hours saved on manual reconciliation every day</li></ul></div></div>
+    </div>
+  </div>
+  <div class="mcq-block">
+    <div class="mcq-header">
+      <div class="mcq-badge">🎯 Quick Check</div>
+      <div class="mcq-title">Tally Bank Plugin — Test Your Understanding</div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q1.</span> A wholesale trader uses Tally for accounting and has to log into CIB separately every time he needs to pay a vendor or reconcile his accounts. What should the RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'BizPay360 is for bulk digital payments — it does not integrate with Tally to eliminate the login-switching problem.',28)"><div class="option-dot">A</div>BizPay360</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'H2H is for large enterprises with ERP systems and high transaction volumes — the wholesale trader uses Tally, which is served better by the Bank Plugin.',28)"><div class="option-dot">B</div>H2H Integration</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Tally Bank Plugin integrates banking directly into Tally — the merchant never needs to log into CIB separately again. Vendor payments, balance checking, and reconciliation all happen inside Tally.',28)"><div class="option-dot">C</div>Tally Bank Plugin</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'E-Collection is for receiving payments and identifying payers — not for solving the problem of switching between Tally and CIB.',28)"><div class="option-dot">D</div>E-Collection</div>
+      </div>
+      <div class="mcq-feedback" id="fb-28"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q2.</span> Which of the following actions can a merchant perform directly from inside Tally after installing the Bank Plugin?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Loan applications are not a feature of the Tally Bank Plugin — they are handled through separate banking channels.',29)"><div class="option-dot">A</div>Apply for a loan</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! GST payments with auto-reconciliation are available through the Tally Bank Plugin — but only for Tally, not for Busy software.',29)"><div class="option-dot">B</div>View and pay GST through Tally (Tally only)</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Debit card blocking is a card management function — it is not available through the Tally Bank Plugin.',29)"><div class="option-dot">C</div>Block a debit card</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'FD certificates are not a feature of the Tally Bank Plugin.',29)"><div class="option-dot">D</div>Download a Fixed Deposit certificate</div>
+      </div>
+      <div class="mcq-feedback" id="fb-29"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q3.</span> A merchant is using Tally ERP 9. Which minimum version is required for the Bank Plugin to work?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Version 5.0 is too old for Bank Plugin compatibility — a minimum version of 6.6.3 is required.',30)"><div class="option-dot">A</div>Version 5.0 and above</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Version 6.0 is not sufficient — the minimum required version for Tally ERP 9 is specifically 6.6.3.',30)"><div class="option-dot">B</div>Version 6.0 and above</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! For Tally ERP 9, the Bank Plugin requires version 6.6.3 or above. For Tally Prime, any version works. For Busy, version 18 or above.',30)"><div class="option-dot">C</div>Version 6.6.3 and above</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Not all versions of Tally ERP 9 support Bank Plugin — version 6.6.3 or above is the minimum requirement.',30)"><div class="option-dot">D</div>Any version of Tally ERP 9</div>
+      </div>
+      <div class="mcq-feedback" id="fb-30"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q4.</span> What makes Tally Bank Plugin suitable for small and mid-size businesses compared to H2H or API Banking?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Tally Bank Plugin is not more expensive — it is actually designed to be accessible and low-cost for smaller businesses.',31)"><div class="option-dot">A</div>It is more expensive than H2H</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'H2H requires IT team involvement — Tally Plugin is specifically designed to NOT need IT department help.',31)"><div class="option-dot">B</div>It requires a dedicated IT team to set up</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Tally Bank Plugin requires low technical skill and has a DIY, instant, paperless onboarding process. An accountant can set it up and operate it — no IT team needed. This makes it ideal for small and mid-size Tally users.',31)"><div class="option-dot">C</div>It has low technical skill requirement and DIY onboarding</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Tally Bank Plugin is specifically designed for small and mid-size businesses using Tally — not for large enterprises, who typically use H2H or API banking.',31)"><div class="option-dot">D</div>It only works for large enterprises</div>
+      </div>
+      <div class="mcq-feedback" id="fb-31"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q5.</span> After the Tally Bank Plugin is installed, how does reconciliation work?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Manual reconciliation is precisely what Bank Plugin eliminates — after installation, reconciliation is automated.',32)"><div class="option-dot">A</div>Merchant still needs to manually download bank statement and update Tally</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Bank Plugin enables seamless end-to-end reconciliation with auto-voucher generation. Bank entries automatically match with Tally books — no manual entry or separate bank statement download needed.',32)"><div class="option-dot">B</div>Reconciliation happens automatically — bank entries auto-match with Tally books</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Bank Plugin reduces the need for manual reconciliation significantly — a CA is not required for this specific task.',32)"><div class="option-dot">C</div>Merchant needs to hire a CA to reconcile</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Reconciliation through Bank Plugin happens in real-time with each transaction — not just monthly.',32)"><div class="option-dot">D</div>Reconciliation happens only once a month</div>
+      </div>
+      <div class="mcq-feedback" id="fb-32"></div>
+    </div>
+  </div>
+  <div class="dnd-block" id="dnd6">
+    <div class="dnd-header">
+      <div class="dnd-badge">🎮 Match the Merchant</div>
+      <div class="dnd-title">Match the Problem to the Tally Bank Plugin Feature</div>
+    </div>
+    <div class="dnd-instruction">💡 Drag each merchant problem to the Bank Plugin feature that solves it.</div>
+    <div class="dnd-score-display" id="dnd6-score"></div>
+    <div class="dnd-body">
+      <div class="dnd-chips-area">
+        <h4>Merchant / Situation</h4>
+        <div class="dnd-chips" id="dnd6-chips"><div class="dnd-chip" draggable="false" data-id="chip0" data-answer="balance">Merchant cannot see live bank balance inside Tally before making payments</div><div class="dnd-chip" draggable="false" data-id="chip1" data-answer="recon">Accounts team spends hours manually updating payment status in Tally after CIB</div><div class="dnd-chip" draggable="false" data-id="chip2" data-answer="gst">Merchant needs to pay GST directly from Tally without logging into CIB</div><div class="dnd-chip" draggable="false" data-id="chip3" data-answer="vendorpay">Vendor payment made in Tally — no corresponding voucher auto-created</div></div>
+      </div>
+      <div class="dnd-zones-area">
+        <h4>ICICI Solution</h4>
+        <div class="dnd-zones" id="dnd6-zones"><div class="drop-zone" data-id="balance" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd6')"><div class="zone-label">Fetch Account Balance feature</div></div><div class="drop-zone" data-id="recon" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd6')"><div class="zone-label">Seamless Bank Reconciliation with auto-voucher</div></div><div class="drop-zone" data-id="gst" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd6')"><div class="zone-label">Direct GST Payment from Tally</div></div><div class="drop-zone" data-id="vendorpay" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd6')"><div class="zone-label">Direct Vendor Payment with auto-reconciliation</div></div></div>
+      </div>
+    </div>
+    <div class="dnd-buttons">
+      <button class="dnd-check-btn" id="dnd6-checkbtn" onclick="checkDnD('dnd6',4)">Check Answers</button>
+      <button class="dnd-reset-btn" id="dnd6-resetbtn" onclick="resetDnD('dnd6')">Try Again</button>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="topic-section">
+  <div class="topic-header">
+    <div class="topic-number">10</div>
+    <div>
+      <div class="topic-title">API Banking vs H2H vs Tally Plugin — Which Technology for Which Merchant?</div>
+      <div class="topic-subtitle">The decision guide for Connected Banking — matching tech to the right business</div>
+    </div>
+  </div>
+  <div class="merchant-box">
+    <div class="merchant-emoji">🏥</div>
+    <div>
+      <div class="merchant-label">Meet the Merchant</div>
+      <div class="merchant-story">Imagine three businesses: <strong>Ramesh — wholesale trader using Tally</strong> (small team, no IT department). <strong>Preethi — mid-size manufacturing company</strong> with an ERP system and needs real-time bank integration. <strong>XYZ Hospital — large multi-speciality hospital</strong> processing 5,000+ vendor and salary payments overnight. <strong>Same bank. Same need to integrate banking with business systems. But three completely different solutions — Plugin, API Banking, and H2H.</strong></div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">🔌</div>
+          <div class="faq-q-text">What is API Banking and which merchant profile needs it?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>API Banking means ICICI Bank has opened its systems through <strong>340+ banking APIs</strong> that allow a merchant's ERP or custom software to directly execute banking transactions — without anyone logging into internet banking.</p><p><strong>Who needs API Banking:</strong></p><ul><li>Businesses with custom-built ERP or proprietary software</li><li>Mid-to-large businesses with IT teams who can integrate APIs</li><li>Companies needing real-time transaction processing from their own software</li><li>Businesses with high transaction volumes needing instant processing</li></ul><div class="example-box"><strong>Preethi's manufacturing company</strong>Preethi's ERP system is custom-built. She needs vendor payments to go from her ERP directly to the bank in real-time — no file uploads, no manual steps. Her IT team integrates ICICI's Payment APIs. Now, when her ERP generates a payment, it hits the bank API instantly and the transaction goes through — all within her ERP screen. Zero internet banking logins.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">📡</div>
+          <div class="faq-q-text">What is H2H (Host to Host) and which type of business needs it?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>H2H stands for <strong>Host to Host</strong> — a direct server-to-server file transfer between the merchant's ERP/system and ICICI Bank's server via an encrypted channel. No human logs in. Files transfer automatically at scheduled times.</p><p><strong>Who needs H2H:</strong></p><ul><li>Very large enterprises with thousands of transactions</li><li>Businesses needing scheduled overnight batch processing</li><li>Companies with SAP, Oracle, or large ERP systems</li><li>Businesses where IT department manages system integrations</li></ul><div class="example-box"><strong>XYZ Hospital — the H2H case study from ICICI PPT</strong>The hospital uses Tally and processes 5,000+ transactions monthly. Before H2H: Extract file from Tally → upload manually to bank → download MIS → update Tally manually → Finance team manually confirms payments to 500 vendors. This took 10 days of reconciliation effort every month.<br><br>After Tally H2H: File pushes from Tally directly to bank server overnight. MIS auto-updates in Tally. Payment advice auto-sent to all vendors. 10 days saved every month. Zero manual steps.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">📊</div>
+          <div class="faq-q-text">The simple decision guide — how does an RM choose between Plugin, API, and H2H?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p>Use this three-question test:</p><p><strong>Question 1: Does the merchant use Tally or Busy?</strong><br>If YES and they have a small-mid size business → <strong>Tally Bank Plugin</strong></p><p><strong>Question 2: Does the merchant have a custom ERP and an IT team?</strong><br>If YES and they need real-time transaction processing → <strong>API Banking</strong></p><p><strong>Question 3: Does the merchant have very large transaction volumes (1,000+) needing automated overnight batch processing?</strong><br>If YES → <strong>H2H</strong></p><div class="example-box"><strong>Simple comparison table</strong>Plugin: Low tech skill needed | DIY setup | Best for Tally/Busy users | Small-mid business<br>API: IT team needed | Real-time | Custom ERP | Mid-large business<br>H2H: IT team needed | Batch/scheduled | Any large ERP | Very large enterprise</div></div></div>
+    </div>
+  </div>
+  <div class="mcq-block">
+    <div class="mcq-header">
+      <div class="mcq-badge">🎯 Quick Check</div>
+      <div class="mcq-title">API vs H2H vs Tally Plugin — Test Your Understanding</div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q1.</span> A wholesale trader with 3 staff members uses Tally for accounting. He wants to stop logging into CIB separately and do banking from inside Tally. No IT team available. What should the RM recommend?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'API Banking requires an IT team for integration — not suitable for a small business with no technical staff.',33)"><div class="option-dot">A</div>API Banking</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'H2H is for very large enterprises with high transaction volumes — overkill and too complex for a 3-person wholesale business.',33)"><div class="option-dot">B</div>H2H Integration</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Tally Bank Plugin is perfect — low technical skill needed, DIY setup, and integrates banking directly into Tally without any IT team involvement.',33)"><div class="option-dot">C</div>Tally Bank Plugin</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'BizPay360 is for bulk digital payments — it does not solve the problem of switching between Tally and internet banking.',33)"><div class="option-dot">D</div>BizPay360</div>
+      </div>
+      <div class="mcq-feedback" id="fb-33"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q2.</span> XYZ Hospital processes 5,000 vendor and salary payments every month. They want payment files from their Tally to be automatically sent to ICICI Bank overnight without anyone logging in, and the MIS to auto-update in Tally. What is the right solution?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Tally Bank Plugin is for smaller businesses needing real-time single transactions — it is not designed for automated overnight batch processing of 5,000 transactions.',34)"><div class="option-dot">A</div>Tally Bank Plugin</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'API Banking is for real-time transaction-by-transaction processing — not for scheduled overnight batch file transfer.',34)"><div class="option-dot">B</div>API Banking</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! H2H enables server-to-server automated file transfer overnight — the hospital's Tally pushes the file to ICICI Bank automatically, and MIS auto-updates back into Tally. This is exactly the XYZ Hospital case study.',34)"><div class="option-dot">C</div>H2H Integration</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'I-Multipay with manual upload still requires a human to log in and upload — it does not solve the automation need.',34)"><div class="option-dot">D</div>I-Multipay manual upload</div>
+      </div>
+      <div class="mcq-feedback" id="fb-34"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q3.</span> A mid-size e-commerce company has a custom-built order management system. They want their system to automatically initiate refunds and payments in real-time through ICICI Bank — without any file uploads or manual steps. What do they need?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'BizPay360 requires a human to upload a payment file — it does not support real-time automated API-level integration.',35)"><div class="option-dot">A</div>BizPay360</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'I-Multipay also requires file uploads or H2H — it does not provide real-time API transaction processing.',35)"><div class="option-dot">B</div>I-Multipay</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! API Banking allows the merchant's custom system to call ICICI Bank's APIs directly for each transaction in real-time. Refunds, payments, balance checks — all from within their own system.',35)"><div class="option-dot">C</div>API Banking</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Tally Bank Plugin only works with Tally and Busy software — not with custom-built order management systems.',35)"><div class="option-dot">D</div>Tally Bank Plugin</div>
+      </div>
+      <div class="mcq-feedback" id="fb-35"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q4.</span> Which of the following does NOT require an IT team or technical staff to set up?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'API Banking requires an IT team to integrate APIs with the merchant's existing software systems.',36)"><div class="option-dot">A</div>API Banking</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'H2H integration requires technical setup of SFTP connections and server configuration — definitely needs IT involvement.',36)"><div class="option-dot">B</div>H2H Integration</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! Tally Bank Plugin has a DIY, instant, paperless onboarding process with low technical skill requirement. An accountant can set it up and use it without any IT department.',36)"><div class="option-dot">C</div>Tally Bank Plugin</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'H2H via SFTP requires server configuration and technical setup — definitely not DIY.',36)"><div class="option-dot">D</div>Host-to-Host via SFTP</div>
+      </div>
+      <div class="mcq-feedback" id="fb-36"></div>
+    </div>
+    <div class="mcq-item">
+      <div class="mcq-q"><span>Q5.</span> What is the primary advantage of H2H over API Banking for very large enterprises?</div>
+      <div class="mcq-options">
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Cost comparison is not the primary differentiator between H2H and API Banking.',37)"><div class="option-dot">A</div>H2H is cheaper than API Banking</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'Physical cheque printing is an I-Multipay feature — not a specific advantage of H2H over API Banking.',37)"><div class="option-dot">B</div>H2H supports physical cheque printing</div>
+        <div class="mcq-option" onclick="checkMCQ(this,true,'Correct! H2H is specifically suited for large batch processing — thousands of transactions sent overnight in one automated file transfer. API Banking processes transactions in real-time one at a time, which is less efficient for very large batch volumes.',37)"><div class="option-dot">C</div>H2H enables scheduled automated batch file processing overnight — suitable for thousands of transactions</div>
+        <div class="mcq-option" onclick="checkMCQ(this,false,'H2H does not work directly with standard Tally without special Tally H2H configuration — it is an enterprise-level integration, not a simple DIY setup.',37)"><div class="option-dot">D</div>H2H works with Tally directly without any setup</div>
+      </div>
+      <div class="mcq-feedback" id="fb-37"></div>
+    </div>
+  </div>
+  <div class="dnd-block" id="dnd7">
+    <div class="dnd-header">
+      <div class="dnd-badge">🎮 Match the Merchant</div>
+      <div class="dnd-title">Match the Merchant to the Right Connected Banking Solution</div>
+    </div>
+    <div class="dnd-instruction">💡 Drag each merchant profile to the ICICI Connected Banking solution that fits them best.</div>
+    <div class="dnd-score-display" id="dnd7-score"></div>
+    <div class="dnd-body">
+      <div class="dnd-chips-area">
+        <h4>Merchant / Situation</h4>
+        <div class="dnd-chips" id="dnd7-chips"><div class="dnd-chip" draggable="false" data-id="chip0" data-answer="plugin">Small garment shop — uses Tally, wants to pay vendors without logging into CIB</div><div class="dnd-chip" draggable="false" data-id="chip1" data-answer="h2h">Large hospital — 5000+ transactions, needs automated overnight file transfer to bank</div><div class="dnd-chip" draggable="false" data-id="chip2" data-answer="api">E-commerce startup — custom app, needs real-time payment API calls from their own system</div><div class="dnd-chip" draggable="false" data-id="chip3" data-answer="plugin">Wholesale distributor — uses Tally Prime, wants live balance and GST payment inside Tally</div><div class="dnd-chip" draggable="false" data-id="chip4" data-answer="h2h">Manufacturing company — SAP ERP, needs scheduled batch payments processed nightly</div></div>
+      </div>
+      <div class="dnd-zones-area">
+        <h4>ICICI Solution</h4>
+        <div class="dnd-zones" id="dnd7-zones"><div class="drop-zone" data-id="plugin" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd7')"><div class="zone-label">Tally Bank Plugin</div></div><div class="drop-zone" data-id="h2h" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd7')"><div class="zone-label">H2H (Host to Host)</div></div><div class="drop-zone" data-id="api" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,'dnd7')"><div class="zone-label">API Banking</div></div></div>
+      </div>
+    </div>
+    <div class="dnd-buttons">
+      <button class="dnd-check-btn" id="dnd7-checkbtn" onclick="checkDnD('dnd7',5)">Check Answers</button>
+      <button class="dnd-reset-btn" id="dnd7-resetbtn" onclick="resetDnD('dnd7')">Try Again</button>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="light-section">
+  <div class="light-header">
+    <div class="light-number">11</div>
+    <div>
+      <div class="light-title">Settlement & Reconciliation — Key Concepts</div>
+      <div class="light-subtitle">Concepts that appear across all MES products — explained once, clearly</div>
+    </div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">📅</div>
+          <div class="faq-q-text">What does T+1 Settlement mean and why do merchants care about it?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p><strong>T = Transaction date. T+1 = Next working day.</strong></p><p>When a customer pays a merchant via POS, QR, or Payment Gateway, the money does not appear in the merchant's account instantly — it goes through a settlement cycle. T+1 means the money reaches the merchant's ICICI Current Account by the next working day.</p><div class="example-box"><strong>Why merchants care deeply about this</strong>A supermarket collects ₹10 lakh on a Saturday. With T+1, the money is in the account by Monday morning — available for paying suppliers on Monday. If settlement was T+5, the merchant would have a cash crunch for 5 days. T+1 gives merchants working capital predictability.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">📋</div>
+          <div class="faq-q-text">What is MIS and why is it important for a merchant?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p><strong>MIS = Management Information System</strong> — essentially a detailed report of all transactions. In ICICI MES, almost every product generates a MIS report: POS MIS, Payment Gateway MIS, E-Collection MIS, BizPay360 MIS.</p><p>The MIS tells the merchant: who paid, how much, when, through which mode, and the transaction status.</p><div class="example-box"><strong>Why MIS matters</strong>Without MIS: Merchant spends hours manually matching bank statement with their sales records — prone to errors.<br><br>With MIS: All transaction data in one structured report — downloadable in Excel, PDF, or text — that can be directly uploaded into accounting software. Reconciliation that used to take 3 days now takes 30 minutes.</div></div></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        <div class="faq-q-left">
+          <div class="faq-q-icon">✅</div>
+          <div class="faq-q-text">What is Reconciliation and why is it a pain point for merchants?</div>
+        </div>
+        <div class="faq-arrow">▼</div>
+      </div>
+      <div class="faq-answer"><div class="faq-answer-inner"><p><strong>Reconciliation = matching what the merchant's books say vs what the bank statement says.</strong></p><p>Every business has to do this — for every payment received and every payment made. If the numbers do not match, there is an accounting error or a missing/extra payment.</p><p>Manual reconciliation (without ICICI MES tools) is tedious, error-prone, and time-consuming — especially for businesses with hundreds of daily transactions.</p><div class="example-box"><strong>How ICICI MES solves reconciliation across products</strong>E-Collection: MIS report auto-ready for accounting software upload.<br>BizPay360: File sequence number in debit narration for easy matching.<br>Tally Plugin: Auto-voucher creation and instant reconciliation within Tally.<br>H2H: Reverse MIS auto-updates back into ERP after bank processes file.<br><br>The common theme: ICICI removes the manual step from reconciliation wherever possible.</div></div></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+<div class="badge-section">
+  <div class="badge-card" id="badgeCard">
+    <div style="color:rgba(255,255,255,0.6);font-size:13px;margin-bottom:8px;">Module Complete 🎉</div>
+    <div class="badge-emoji" id="badgeEmoji">🏆</div>
+    <div class="badge-title" id="badgeTitle">Calculating your score...</div>
+    <div class="badge-subtitle" id="badgeSubtitle"></div>
+    <div class="badge-score" id="badgeScore"></div>
+    <div class="badge-score-label" id="badgeScoreLabel"></div>
+    <div class="badge-message" id="badgeMessage"></div>
+    <div style="margin-top:24px;">
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="background:var(--orange);color:white;border:none;border-radius:10px;padding:12px 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">↑ Review Again</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>SES 4 — Merchant Ecosystem Solutions | Self-Learning Module</p>
+</div>
+
+<script>
+// ── PROGRESS TRACKING ──
+let totalFAQs = 0;
+let openedFAQs = new Set();
+let totalMCQ = 0;
+let correctMCQ = 0;
+let totalDnD = 0;
+let correctDnD = 0;
+
+function updateProgress() {
+  totalFAQs = document.querySelectorAll(".faq-item").length;
+  const faqPct = totalFAQs > 0 ? (openedFAQs.size / totalFAQs) * 40 : 0;
+  const mcqPct = totalMCQ > 0 ? (Object.keys(mcqAnswered).length / totalMCQ) * 35 : 0;
+  const dndPct = totalDnD > 0 ? (dndChecked.size / totalDnD) * 25 : 0;
+  const total = Math.min(100, Math.round(faqPct + mcqPct + dndPct));
+  document.getElementById("progressBar").style.width = total + "%";
+  document.getElementById("progressPct").textContent = total + "%";
+  const scoreEl = document.getElementById("totalScorePill");
+  const pts = correctMCQ + correctDnD;
+  scoreEl.textContent = "Score: " + pts;
+  if (total >= 95) computeBadge();
+}
+
+// ── FAQ TOGGLE ──
+function toggleFAQ(el) {
+  const isOpen = el.classList.contains("open");
+  document.querySelectorAll(".faq-item").forEach(f => f.classList.remove("open"));
+  if (!isOpen) {
+    el.classList.add("open");
+    const idx = Array.from(document.querySelectorAll(".faq-item")).indexOf(el);
+    openedFAQs.add(idx);
+    updateProgress();
+  }
+}
+
+// ── MCQ ──
+let mcqAnswered = {};
+function checkMCQ(el, isCorrect, explanation, qid) {
+  if (mcqAnswered[qid] !== undefined) return;
+  mcqAnswered[qid] = isCorrect;
+  if (isCorrect) correctMCQ++;
+  totalMCQ = document.querySelectorAll(".mcq-item").length;
+  const opts = el.parentElement.querySelectorAll(".mcq-option");
+  opts.forEach(o => o.style.pointerEvents = "none");
+  if (isCorrect) {
+    el.classList.add("correct");
+  } else {
+    el.classList.add("wrong");
+    opts.forEach(o => { if (o.getAttribute("onclick") && o.getAttribute("onclick").includes("true")) o.classList.add("reveal-correct"); });
+  }
+  const fb = document.getElementById("fb-" + qid);
+  fb.className = "mcq-feedback " + (isCorrect ? "correct-fb" : "wrong-fb") + " show";
+  fb.innerHTML = (isCorrect ? "✅ " : "❌ ") + explanation;
+  updateProgress();
+}
+
+// ── DRAG AND DROP ──
+let draggedChip = null;
+let dndChecked = new Set();
+let dndScores = {};
+
+function dzOver(e) {
+  e.preventDefault();
+  e.currentTarget.classList.add("drag-over");
+}
+function dzLeave(e) {
+  e.currentTarget.classList.remove("drag-over");
+}
+function dzDrop(e, gameId) {
+  e.preventDefault();
+  const zone = e.currentTarget;
+  zone.classList.remove("drag-over");
+  if (!draggedChip || dndChecked.has(gameId)) return;
+  // Return existing chip to chips area
+  const existing = zone.querySelector(".dnd-chip");
+  if (existing) {
+    document.getElementById(gameId + "-chips").appendChild(existing);
+  }
+  zone.appendChild(draggedChip);
+  draggedChip = null;
+}
+
+function checkDnD(gameId, total) {
+  if (dndChecked.has(gameId)) return;
+  dndChecked.add(gameId);
+  totalDnD++;
+  let correct = 0;
+  const zones = document.querySelectorAll("#" + gameId + " .drop-zone");
+  zones.forEach(zone => {
+    const chip = zone.querySelector(".dnd-chip");
+    const zoneId = zone.getAttribute("data-id");
+    if (chip) {
+      const chipAnswer = chip.getAttribute("data-answer");
+      if (chipAnswer === zoneId) {
+        zone.classList.add("correct-zone");
+        chip.classList.add("correct-chip");
+        correct++;
+      } else {
+        zone.classList.add("wrong-zone");
+        chip.classList.add("wrong-chip");
+      }
+    }
+  });
+  // Highlight unplaced chips as wrong
+  document.querySelectorAll("#" + gameId + "-chips .dnd-chip").forEach(c => c.classList.add("wrong-chip"));
+  
+  dndScores[gameId] = {correct, total};
+  correctDnD += correct;
+  
+  const scoreEl = document.getElementById(gameId + "-score");
+  scoreEl.innerHTML = correct === total 
+    ? "<span style=\"color:var(--green);font-weight:700\">🎉 Perfect! " + correct + "/" + total + " correct!</span>"
+    : "<span style=\"color:var(--orange-dark)\">You got " + correct + "/" + total + " correct. Review the highlighted answers above.</span>";
+  
+  document.getElementById(gameId + "-checkbtn").disabled = true;
+  document.getElementById(gameId + "-resetbtn").style.display = "inline-block";
+  
+  // Disable dragging
+  document.querySelectorAll("#" + gameId + " .dnd-chip").forEach(c => c.setAttribute("draggable", "false"));
+  updateProgress();
+}
+
+function resetDnD(gameId) {
+  if (!dndChecked.has(gameId)) return;
+  // Subtract score
+  if (dndScores[gameId]) correctDnD -= dndScores[gameId].correct;
+  dndChecked.delete(gameId);
+  delete dndScores[gameId];
+  totalDnD--;
+  
+  const chipsArea = document.getElementById(gameId + "-chips");
+  document.querySelectorAll("#" + gameId + " .drop-zone").forEach(zone => {
+    zone.classList.remove("correct-zone","wrong-zone","drag-over");
+    const chip = zone.querySelector(".dnd-chip");
+    if (chip) {
+      chip.classList.remove("correct-chip","wrong-chip");
+      chip.setAttribute("draggable","true");
+      chipsArea.appendChild(chip);
+    }
+  });
+  document.querySelectorAll("#" + gameId + "-chips .dnd-chip").forEach(c => {
+    c.classList.remove("correct-chip","wrong-chip");
+    c.setAttribute("draggable","true");
+  });
+  document.getElementById(gameId + "-score").innerHTML = "";
+  document.getElementById(gameId + "-checkbtn").disabled = false;
+  document.getElementById(gameId + "-resetbtn").style.display = "none";
+  updateProgress();
+}
+
+// ── BADGE ──
+function computeBadge() {
+  const totalPoints = correctMCQ + correctDnD;
+  const maxMCQ = document.querySelectorAll(".mcq-item").length;
+  const maxDnD = document.querySelectorAll(".dnd-chip").length;
+  const maxPoints = maxMCQ + maxDnD;
+  const pct = maxPoints > 0 ? Math.round((totalPoints / maxPoints) * 100) : 0;
+  
+  let emoji, title, subtitle, message;
+  if (pct >= 90) {
+    emoji = "🏆"; title = "MES Champion!";
+    subtitle = "Outstanding — you are ready for the field";
+    message = "You have demonstrated exceptional understanding of Merchant Ecosystem Solutions. You can confidently walk into any merchant meeting and identify the right ICICI product for their needs. You are ready to be an RM!";
+  } else if (pct >= 71) {
+    emoji = "🥇"; title = "MES Expert!";
+    subtitle = "Excellent performance — nearly field-ready";
+    message = "Strong understanding across all MES concepts. Review any topics where you lost points and you will be fully field-ready. Well done!";
+  } else if (pct >= 41) {
+    emoji = "🥈"; title = "MES Associate";
+    subtitle = "Good foundation — a little more review needed";
+    message = "You have grasped the core concepts. We recommend reviewing the sections where you missed points — especially the drag & drop games which test real-world application. Keep going!";
+  } else {
+    emoji = "🥉"; title = "MES Beginner";
+    subtitle = "Keep going — every expert started here";
+    message = "You have made a start! Go back through the 'Meet the Merchant' stories and FAQs for the topics you found difficult. The concepts will click — take your time and try the activities again.";
+  }
+  
+  document.getElementById("badgeEmoji").textContent = emoji;
+  document.getElementById("badgeTitle").textContent = title;
+  document.getElementById("badgeSubtitle").textContent = subtitle;
+  document.getElementById("badgeScore").textContent = totalPoints + " / " + maxPoints + " points";
+  document.getElementById("badgeScoreLabel").textContent = pct + "% score across all MCQs and Match activities";
+  document.getElementById("badgeMessage").textContent = message;
+}
+
+// ── POINTER-BASED DRAG (mouse, touch, iOS Safari) + TAP-TO-PLACE ──
+let selectedChip = null;
+function placeChip(chip, zone) {
+  const gameId = zone.closest(".dnd-block").id;
+  if (dndChecked.has(gameId)) return;
+  if (chip.closest(".dnd-block") !== zone.closest(".dnd-block")) return;
+  const existing = zone.querySelector(".dnd-chip");
+  if (existing && existing !== chip) document.getElementById(gameId + "-chips").appendChild(existing);
+  zone.appendChild(chip);
+}
+function clearSelection() {
+  if (selectedChip) selectedChip.classList.remove("selected");
+  selectedChip = null;
+}
+function zoneAt(x, y) {
+  const el = document.elementFromPoint(x, y);
+  return el ? el.closest(".drop-zone") : null;
+}
+function initDnD() {
+  document.querySelectorAll(".dnd-chip").forEach(chip => {
+    let sx = 0, sy = 0, dragging = false, ghost = null, pid = null, offX = 0, offY = 0, lastZone = null;
+    chip.addEventListener("contextmenu", e => e.preventDefault());
+    chip.addEventListener("pointerdown", e => {
+      const block = chip.closest(".dnd-block");
+      if (!block || dndChecked.has(block.id)) return;
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      pid = e.pointerId; sx = e.clientX; sy = e.clientY; dragging = false;
+      try { chip.setPointerCapture(pid); } catch (_) {}
+    });
+    chip.addEventListener("pointermove", e => {
+      if (e.pointerId !== pid) return;
+      if (!dragging) {
+        if (Math.hypot(e.clientX - sx, e.clientY - sy) < 6) return;
+        dragging = true;
+        const r = chip.getBoundingClientRect();
+        offX = sx - r.left; offY = sy - r.top;
+        ghost = chip.cloneNode(true);
+        ghost.classList.add("dnd-ghost");
+        ghost.style.width = r.width + "px";
+        document.body.appendChild(ghost);
+        chip.classList.add("dragging");
+      }
+      e.preventDefault();
+      ghost.style.left = (e.clientX - offX) + "px";
+      ghost.style.top = (e.clientY - offY) + "px";
+      const z = zoneAt(e.clientX, e.clientY);
+      if (lastZone && lastZone !== z) lastZone.classList.remove("drag-over");
+      if (z) z.classList.add("drag-over");
+      lastZone = z;
+    });
+    const end = (e, cancelled) => {
+      if (e.pointerId !== pid) return;
+      pid = null;
+      try { chip.releasePointerCapture(e.pointerId); } catch (_) {}
+      if (dragging) {
+        if (ghost) ghost.remove();
+        ghost = null;
+        chip.classList.remove("dragging");
+        if (lastZone) lastZone.classList.remove("drag-over");
+        lastZone = null;
+        if (!cancelled) {
+          const z = zoneAt(e.clientX, e.clientY);
+          if (z) placeChip(chip, z);
+        }
+        dragging = false;
+        clearSelection();
+      } else if (!cancelled) {
+        // tap: select / deselect
+        if (selectedChip === chip) clearSelection();
+        else { clearSelection(); selectedChip = chip; chip.classList.add("selected"); }
+      }
+    };
+    chip.addEventListener("pointerup", e => end(e, false));
+    chip.addEventListener("pointercancel", e => end(e, true));
+  });
+  // tap a zone (or the chip pool) to place the selected chip
+  document.querySelectorAll(".drop-zone").forEach(zone => {
+    zone.addEventListener("click", e => {
+      if (!selectedChip) return;
+      placeChip(selectedChip, zone);
+      clearSelection();
+    });
+  });
+  document.querySelectorAll(".dnd-chips").forEach(pool => {
+    pool.addEventListener("click", e => {
+      if (!selectedChip || e.target.closest(".dnd-chip")) return;
+      const gameId = pool.id.replace("-chips", "");
+      if (dndChecked.has(gameId)) return;
+      pool.appendChild(selectedChip);
+      clearSelection();
+    });
+  });
+}
+
+window.addEventListener("load", () => {
+  totalFAQs = document.querySelectorAll(".faq-item").length;
+  updateProgress();
+  initDnD();
+});
+</script>
+</body>
+</html>
